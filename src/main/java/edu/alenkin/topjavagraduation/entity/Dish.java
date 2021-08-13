@@ -27,7 +27,7 @@ import java.time.LocalDate;
 public class Dish extends AbstractNamedEntity {
 
     @Column(name = "price")
-    private Long price;
+    private Integer price;
 
     @Column(name = "menu_date")
     @NotNull
@@ -41,7 +41,7 @@ public class Dish extends AbstractNamedEntity {
     protected Dish() {
     }
 
-    public Dish(String name, Long price, LocalDate dishDate) {
+    public Dish(String name, Integer price, LocalDate dishDate) {
         super(null, name);
         this.price = price;
         this.dishDate = dishDate;
