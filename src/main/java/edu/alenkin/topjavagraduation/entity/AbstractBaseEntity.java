@@ -1,5 +1,6 @@
 package edu.alenkin.topjavagraduation.entity;
 
+import edu.alenkin.topjavagraduation.HasId;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,6 +13,10 @@ import javax.persistence.*;
 /**
  * @author Alenkin Andrew
  * oxqq@ya.ru
+ * <p>
+ *
+ * The base class, which represents an entity with an ID, contains methods for checking the ID,
+ * and defines the implementation of methods #equals and #hashcode for the persisted entities.
  */
 @MappedSuperclass
 @Access(AccessType.FIELD)

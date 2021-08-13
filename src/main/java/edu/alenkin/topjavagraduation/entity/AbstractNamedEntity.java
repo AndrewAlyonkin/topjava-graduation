@@ -13,6 +13,8 @@ import javax.validation.constraints.Size;
 /**
  * @author Alenkin Andrew
  * oxqq@ya.ru
+ * <p>
+ * The base class, which represents an entity with an name. Contains validation for name field.
  */
 @MappedSuperclass
 @Getter

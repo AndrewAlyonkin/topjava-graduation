@@ -14,6 +14,8 @@ import java.time.LocalDate;
 /**
  * @author Alenkin Andrew
  * oxqq@ya.ru
+ * <p>
+ * Represents food on the restaurant menu.
  */
 
 @Entity
@@ -22,7 +24,7 @@ import java.time.LocalDate;
 @Getter
 @AllArgsConstructor
 @ToString(includeFieldNames = false)
-public class Dish extends AbstractNamedEntity{
+public class Dish extends AbstractNamedEntity {
 
     @Column(name = "price")
     private Long price;
@@ -36,7 +38,8 @@ public class Dish extends AbstractNamedEntity{
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Restaurant restaurant;
 
-    protected Dish(){}
+    protected Dish() {
+    }
 
     public Dish(String name, Long price, LocalDate dishDate) {
         super(null, name);

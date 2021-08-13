@@ -13,6 +13,10 @@ import java.time.LocalDateTime;
 /**
  * @author Alenkin Andrew
  * oxqq@ya.ru
+ * <p>
+ * Represents the vote given for a specific restaurant.
+ * Users can vote on which restaurant they want to have lunch at.
+ * Only one vote counted per user.
  */
 @Entity
 @Table(name = "vote")
@@ -35,7 +39,8 @@ public class Vote extends AbstractBaseEntity {
     @NotNull
     private LocalDateTime voteDateTime;
 
-    public Vote(){}
+    public Vote() {
+    }
 
     public Vote(User user, Restaurant restaurant, LocalDateTime voteDateTime) {
         super(null);
@@ -50,5 +55,4 @@ public class Vote extends AbstractBaseEntity {
         this.restaurant = restaurant;
         this.voteDateTime = voteDateTime;
     }
-
 }

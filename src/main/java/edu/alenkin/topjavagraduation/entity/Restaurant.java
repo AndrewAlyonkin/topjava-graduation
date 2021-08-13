@@ -14,6 +14,8 @@ import java.util.List;
 /**
  * @author Alenkin Andrew
  * oxqq@ya.ru
+ * <p>
+ * The restaurant contains a menu that is filled in by the administrator and is updated every day.
  */
 
 @Entity
