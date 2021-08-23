@@ -29,7 +29,7 @@ public class Dish extends AbstractNamedEntity {
     @Column(name = "price")
     private Integer price;
 
-    @Column(name = "menu_date")
+    @Column(name = "dish_date")
     @NotNull
     private LocalDate dishDate = LocalDate.now();
 
