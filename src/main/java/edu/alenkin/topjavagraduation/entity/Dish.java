@@ -1,9 +1,6 @@
 package edu.alenkin.topjavagraduation.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -23,28 +20,31 @@ import java.time.LocalDate;
 @Setter
 @Getter
 @AllArgsConstructor
-@ToString(includeFieldNames = false)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@ToString(includeFieldNames = false, exclude = "restaurant")
 public class Dish extends AbstractNamedEntity {
 
     @Column(name = "price")
     private Integer price;
 
-    @Column(name = "dish_date")
+    @Column(name = "date")
     @NotNull
-    private LocalDate dishDate = LocalDate.now();
+    private LocalDate date = LocalDate.now();
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "restaurant_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
+    @NotNull
     private Restaurant restaurant;
 
-    protected Dish() {
+    public Dish(String name, Integer price, LocalDate date, Restaurant restaurant) {
+        this(null, name, price, date, restaurant);
     }
 
-    public Dish(String name, Integer price, LocalDate dishDate) {
-        super(null, name);
+    public Dish(Integer id, String name, Integer price, LocalDate date, Restaurant restaurant) {
+        super(id, name);
         this.price = price;
-        this.dishDate = dishDate;
+        this.date = date;
+        this.restaurant = restaurant;
     }
-
 }

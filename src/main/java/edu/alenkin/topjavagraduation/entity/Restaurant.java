@@ -4,11 +4,12 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.List;
 
 /**
@@ -20,21 +21,35 @@ import java.util.List;
 
 @Entity
 @Table(name = "restaurant")
+@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Setter
 @Getter
 @NoArgsConstructor
-@ToString(includeFieldNames = false)
-public class Restaurant extends AbstractNamedEntity {
+public class Restaurant extends AbstractNamedEntity implements HasId {
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "restaurant")
+    @Fetch(value = FetchMode.SUBSELECT)
     private List<Dish> menu;
 
     public Restaurant(String name) {
-        super(null, name);
+        this(null, name);
     }
 
     public Restaurant(Integer id, String name) {
-        super(id, name);
+        this(id, name, null);
     }
 
+    public Restaurant(Integer id, String name, List<Dish> menu) {
+        super(id, name);
+        this.menu = menu;
+    }
+
+    @Override
+    public String toString() {
+        return "Restaurant{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", menu=" + menu +
+                '}';
+    }
 }

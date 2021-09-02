@@ -18,7 +18,10 @@ import java.util.List;
 @Transactional(readOnly = true)
 public interface VoteRepository extends JpaRepository<Vote, Integer> {
 
-    @Query("SELECT v FROM Vote v WHERE v.user.id =:userId")
+    @Query("""
+            SELECT v FROM Vote v
+            WHERE v.user.id =:userId ORDER BY v.voteDateTime DESC
+            """)
     List<Vote> getAllForUser(@Param("userId") int userId);
 
     @Query("""
@@ -27,8 +30,23 @@ public interface VoteRepository extends JpaRepository<Vote, Integer> {
             AND v.voteDateTime>=:startDateTime
             AND v.voteDateTime<=:endDateTime
             """)
-    Vote getAllForUserBetween(@Param("userId") int userId,
-                             @Param("startDateTime") LocalDateTime startDateTime,
-                             @Param("endDateTime") LocalDateTime endDateTime);
+    List<Vote> getAllForUserBetween(@Param("userId") int userId,
+                                    @Param("startDateTime") LocalDateTime startDateTime,
+                                    @Param("endDateTime") LocalDateTime endDateTime);
+
+    @Query("""
+            SELECT v FROM Vote v 
+            WHERE v.restaurant.id=:restaurantId
+            AND v.voteDateTime <=:endDateTime
+            AND v.voteDateTime >=:startDateTime
+            """)
+    List<Vote> getAllForRestaurantInDate(@Param("startDateTime") LocalDateTime startDate, @Param("endDateTime") LocalDateTime endDate, @Param("restaurantId") int restaurantId);
+
+    @Query("SELECT v FROM Vote v WHERE v.restaurant.id=:restaurantId")
+    List<Vote> getAllForRestaurant(@Param("restaurantId") int restaurantId);
+
+
+    @Query("SELECT v FROM Vote v WHERE v.voteDateTime <=:endDate AND v.voteDateTime >=:startDate")
+    List<Vote> getAllByDate(@Param("startDate") LocalDateTime startDate, @Param("endDate") LocalDateTime endDate);
 
 }

@@ -1,7 +1,10 @@
 package edu.alenkin.topjavagraduation.service;
 
 import edu.alenkin.topjavagraduation.entity.Restaurant;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -11,15 +14,18 @@ import java.util.List;
  */
 public interface RestaurantService {
 
-    Restaurant create(Restaurant restaurant);
+    Restaurant create(@NotNull Restaurant restaurant);
+
+    @Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
+    Restaurant get(int id);
+
+    Restaurant update(@NotNull Restaurant restaurant);
+
+    List<Restaurant> getAll();
 
     void delete(int id);
 
-    Restaurant get(int id);
+    @Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
+    List<Restaurant> getAllWithMenu(LocalDate date);
 
-    List<Restaurant> getAllWithRatingByDate(LocalDate date);
-
-    void update(Restaurant restaurant);
-
-    void enable(int id, boolean enabled);
 }

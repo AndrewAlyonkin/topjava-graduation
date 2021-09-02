@@ -1,6 +1,7 @@
 package edu.alenkin.topjavagraduation.entity;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.annotations.OnDelete;
@@ -23,36 +24,31 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @ToString
+@NoArgsConstructor
 public class Vote extends AbstractBaseEntity {
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private User user;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "restaurant_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Restaurant restaurant;
 
-    @Column(name = "vote_datetime")
+    @Column(name = "datetime")
     @NotNull
     private LocalDateTime voteDateTime;
-
-    public Vote() {
-    }
-
-    public Vote(User user, Restaurant restaurant, LocalDateTime voteDateTime) {
-        super(null);
-        this.user = user;
-        this.restaurant = restaurant;
-        this.voteDateTime = voteDateTime;
-    }
 
     public Vote(Integer id, User user, Restaurant restaurant, LocalDateTime voteDateTime) {
         super(id);
         this.user = user;
         this.restaurant = restaurant;
         this.voteDateTime = voteDateTime;
+    }
+
+    public Vote(User user, Restaurant restaurant, LocalDateTime voteDateTime) {
+        this(null, user, restaurant, voteDateTime);
     }
 }

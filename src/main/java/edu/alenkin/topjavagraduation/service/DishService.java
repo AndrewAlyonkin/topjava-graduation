@@ -2,7 +2,7 @@ package edu.alenkin.topjavagraduation.service;
 
 import edu.alenkin.topjavagraduation.entity.Dish;
 
-import java.time.LocalDate;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
@@ -10,16 +10,13 @@ import java.util.List;
  * oxqq@ya.ru
  */
 public interface DishService {
-    Dish create(Dish dish, int restaurantId);
-
-    Dish update(Dish dish, int restaurantId);
-
-    void delete(int id, int restaurantId);
+    Dish create(@NotNull Dish dish, int restaurantId);
 
     Dish get(int id, int restaurantId);
 
-    List<Dish> getAll(int restaurantId);
+    List<Dish> getAllForRestaurant(int restaurantId);
 
-    List<Dish> getByDate(LocalDate date, int restaurantId);
+    Dish update(@NotNull Dish dish, int restaurantId);
 
+    void delete(int id, int restaurantId);
 }

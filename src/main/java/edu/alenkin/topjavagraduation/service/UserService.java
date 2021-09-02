@@ -21,13 +21,11 @@ public interface UserService extends UserDetailsService {
 
     User getByEmail(String email);
 
-    User getWithVotes(int id);
-
-    void update(User user);
+    User update(User user);
 
     void delete(int id);
 
-    void update(UserTo userTo);
+    User update(UserTo user);
 
     void enable(int id, boolean enabled);
 
