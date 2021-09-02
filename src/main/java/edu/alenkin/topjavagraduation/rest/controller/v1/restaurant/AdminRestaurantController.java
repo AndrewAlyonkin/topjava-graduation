@@ -27,8 +27,8 @@ public class AdminRestaurantController extends AbstractRestaurantController {
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Restaurant> createRest(@RequestBody @Valid Restaurant restaurant) {
-        var created = super.create(restaurant);
+    public ResponseEntity<Restaurant> create(@RequestBody @Valid Restaurant restaurant) {
+        var created = super.doCreate(restaurant);
         URI uriOfNewResource = ServletUriComponentsBuilder
                 .fromCurrentContextPath()
                 .path(REST_URL + "/{id}")

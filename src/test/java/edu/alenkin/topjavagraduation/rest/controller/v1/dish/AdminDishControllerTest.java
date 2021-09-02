@@ -11,10 +11,6 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 class AdminDishControllerTest {
 
-    @BeforeEach
-    void setUp() {
-    }
-
     @Test
     void save() {
     }

@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class AdminRestaurantControllerTest {
 
     @Test
-    void createRest() {
+    void create() {
     }
 
     @Test

@@ -19,7 +19,7 @@ public class AbstractRestaurantController {
 
     private final RestaurantService service;
 
-    public Restaurant create(Restaurant restaurant) {
+    public Restaurant doCreate(Restaurant restaurant) {
         checkNew(restaurant);
         return service.create(restaurant);
     }
