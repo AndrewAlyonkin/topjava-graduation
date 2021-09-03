@@ -104,30 +104,7 @@ public class RestaurantTestData {
         assertThat(actual).usingRecursiveComparison().ignoringFields("menu.restaurant").isEqualTo(expected);
     }
 
-    public static void assertNoIdEquals(Restaurant actual, Restaurant expected) {
-        assertThat(actual).usingRecursiveComparison().ignoringFields("id").isEqualTo(expected);
-    }
-
     public static void assertNoMenuEquals(Restaurant actual, Restaurant expected) {
         assertThat(actual).usingRecursiveComparison().ignoringFields("menu").isEqualTo(expected);
     }
-
-    public static Restaurant asRestaurant(MvcResult mvcResult) throws UnsupportedEncodingException, JsonProcessingException {
-        String jsonActual = mvcResult.getResponse().getContentAsString();
-        return JsonUtil.readValue(jsonActual, Restaurant.class);
-    }
-
-    public static List<Restaurant> asRestaurants(MvcResult mvcResult) throws IOException {
-        String jsonActual = mvcResult.getResponse().getContentAsString();
-        return JsonUtil.readValues(jsonActual, Restaurant.class);
-    }
-
-    public static ResultMatcher jsonMatcher(Restaurant expected, BiConsumer<Restaurant, Restaurant> equalsAssertion) {
-        return mvcResult -> equalsAssertion.accept(asRestaurant(mvcResult), expected);
-    }
-
-    public static ResultMatcher jsonMatcher(List<Restaurant> expected, BiConsumer<List<Restaurant>, List<Restaurant>> equalsAssertion) {
-        return mvcResult -> equalsAssertion.accept(asRestaurants(mvcResult), expected);
-    }
-
 }

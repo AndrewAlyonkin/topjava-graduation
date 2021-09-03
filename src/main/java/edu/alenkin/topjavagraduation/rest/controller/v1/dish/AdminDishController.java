@@ -27,7 +27,7 @@ import static edu.alenkin.topjavagraduation.util.ValidationUtil.checkNew;
 public class AdminDishController {
     public static final String REST_URL = "/rest/v1/admin/restaurants";
 
-    private DishService dishService;
+    private final DishService dishService;
 
     @PostMapping(value = "/{restId}/dishes", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Dish> save(@RequestBody @Valid Dish dish, @PathVariable("restId") int restId) {
@@ -49,12 +49,12 @@ public class AdminDishController {
 
     @GetMapping(value = "/{restId}/dishes", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(value = HttpStatus.OK)
-    public List<Dish> getAll(@PathVariable("restId") int restaurantId) {
+    public List<Dish> getAllForRestaurant(@PathVariable("restId") int restaurantId) {
         return dishService.getAllForRestaurant(restaurantId);
     }
 
     @PutMapping(value = "/{restId}/dishes/{dishId}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseStatus(value = HttpStatus.OK)
+    @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public Dish update(@RequestBody @Valid Dish dish, @PathVariable("restId") int restId, @PathVariable("dishId") int dishId) {
         assureIdConsistent(dish, dishId);
         return dishService.update(dish, restId);

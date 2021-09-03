@@ -1,5 +1,6 @@
 package edu.alenkin.topjavagraduation.rest.controller.v1.restaurant;
 
+import edu.alenkin.topjavagraduation.JsonMatchers;
 import edu.alenkin.topjavagraduation.RestaurantTestData;
 import edu.alenkin.topjavagraduation.entity.Restaurant;
 import edu.alenkin.topjavagraduation.repository.RestaurantRepository;
@@ -12,7 +13,7 @@ import org.springframework.security.test.context.support.WithUserDetails;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import static edu.alenkin.topjavagraduation.RestaurantTestData.GOLDEN_ID;
-import static edu.alenkin.topjavagraduation.RestaurantTestData.jsonMatcher;
+import static edu.alenkin.topjavagraduation.JsonMatchers.jsonMatcher;
 import static edu.alenkin.topjavagraduation.UserTestData.ADMIN_MAIL;
 import static edu.alenkin.topjavagraduation.UserTestData.USER_MAIL;
 import static edu.alenkin.topjavagraduation.util.JsonUtil.writeValue;
@@ -37,7 +38,7 @@ class AdminRestaurantControllerTest extends AbstractControllerTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(writeValue(newRestaurant)))
                 .andExpect(status().isCreated())
-                .andExpect(jsonMatcher(newRestaurant, RestaurantTestData::assertNoIdEquals));
+                .andExpect(jsonMatcher(newRestaurant, Restaurant.class, JsonMatchers::assertNoIdEquals));
     }
 
     @Test

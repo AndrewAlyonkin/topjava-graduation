@@ -1,6 +1,7 @@
 package edu.alenkin.topjavagraduation;
 
 import edu.alenkin.topjavagraduation.entity.Dish;
+import edu.alenkin.topjavagraduation.entity.Restaurant;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -8,6 +9,7 @@ import java.util.List;
 import static edu.alenkin.topjavagraduation.RestaurantTestData.*;
 import static edu.alenkin.topjavagraduation.RestaurantTestData.BISON;
 import static edu.alenkin.topjavagraduation.entity.AbstractBaseEntity.START_SEQ;
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Alenkin Andrew
@@ -49,6 +51,10 @@ public class DishTestData {
 
     public static List<Dish> goldenMenu = List.of(currDateSoupGolden, currDateSaladGolden, currDateMeatGolden, currDateDessertGolden,
             soupGolden, saladGolden, meatGolden, dessertGolden);
+
+    public static void assertNoRestaurantEquals(Dish actual, Dish expected) {
+        assertThat(actual).usingRecursiveComparison().ignoringFields("restaurant").isEqualTo(expected);
+    }
 
     public static Dish getNew() {
         return new Dish( "New Dish", 999, LocalDate.now(), null);

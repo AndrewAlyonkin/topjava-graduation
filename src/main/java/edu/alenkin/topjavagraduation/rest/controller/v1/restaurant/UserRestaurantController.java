@@ -37,12 +37,12 @@ public class UserRestaurantController extends AbstractRestaurantController {
 
     @GetMapping(value = "/today",produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Restaurant> getAllWithMenuForToday() {
-        return super.gwtAllWithDishes(LocalDate.now());
+        return super.getAllWithDishes(LocalDate.now());
     }
 
     @GetMapping(value = "/date",produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Restaurant> getAllWithMenuForDate(@RequestParam @Nullable LocalDate date) {
-        return super.gwtAllWithDishes(date == null ? LocalDate.now() : date);
+        return super.getAllWithDishes(date == null ? LocalDate.now() : date);
     }
 }
 

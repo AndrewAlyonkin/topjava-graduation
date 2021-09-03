@@ -1,11 +1,11 @@
 package edu.alenkin.topjavagraduation.rest.controller.v1.restaurant;
 
+import edu.alenkin.topjavagraduation.JsonMatchers;
 import edu.alenkin.topjavagraduation.RestaurantTestData;
-import edu.alenkin.topjavagraduation.repository.RestaurantRepository;
+import edu.alenkin.topjavagraduation.entity.Restaurant;
 import edu.alenkin.topjavagraduation.rest.controller.v1.AbstractControllerTest;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithUserDetails;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -28,9 +28,6 @@ class UserRestaurantControllerTest extends AbstractControllerTest {
 
     static final String URL = "/rest/v1/restaurants/";
 
-    @Autowired
-    private RestaurantRepository repository;
-
     @Test
     @WithUserDetails(value = USER_MAIL)
     void get() throws Exception {
@@ -38,7 +35,7 @@ class UserRestaurantControllerTest extends AbstractControllerTest {
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andExpect(jsonMatcher(GOLDEN, RestaurantTestData::assertNoMenuEquals));
+                .andExpect(JsonMatchers.jsonMatcher(GOLDEN, Restaurant.class, RestaurantTestData::assertNoMenuEquals));
     }
 
     @Test
@@ -54,7 +51,7 @@ class UserRestaurantControllerTest extends AbstractControllerTest {
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andExpect(jsonMatcher(allRestaurants, (actual, expected) -> assertThat(actual).hasSameElementsAs(expected)));
+                .andExpect(JsonMatchers.jsonMatcher(allRestaurants, Restaurant.class, (actual, expected) -> assertThat(actual).hasSameElementsAs(expected)));
     }
 
     @Test
@@ -64,7 +61,7 @@ class UserRestaurantControllerTest extends AbstractControllerTest {
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andExpect(jsonMatcher(allRestaurantsWithMenuInCurrDay, Assertions::assertIterableEquals));
+                .andExpect(JsonMatchers.jsonMatcher(allRestaurantsWithMenuInCurrDay, Restaurant.class, Assertions::assertIterableEquals));
     }
 
     @Test
@@ -76,6 +73,6 @@ class UserRestaurantControllerTest extends AbstractControllerTest {
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andExpect(jsonMatcher(allRestaurantsWithMenuInCurrDay, Assertions::assertIterableEquals));
+                .andExpect(JsonMatchers.jsonMatcher(allRestaurantsWithMenuInCurrDay, Restaurant.class, Assertions::assertIterableEquals));
     }
 }

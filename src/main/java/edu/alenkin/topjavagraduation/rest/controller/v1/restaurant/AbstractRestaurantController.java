@@ -32,7 +32,7 @@ public class AbstractRestaurantController {
         return service.getAll();
     }
 
-    public List<Restaurant> gwtAllWithDishes(LocalDate date) {
+    public List<Restaurant> getAllWithDishes(LocalDate date) {
         return service.getAllWithMenu(date);
     }
 
