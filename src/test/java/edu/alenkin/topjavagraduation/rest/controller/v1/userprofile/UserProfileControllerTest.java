@@ -14,6 +14,8 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 import static edu.alenkin.topjavagraduation.JsonMatchers.jsonMatcher;
 import static edu.alenkin.topjavagraduation.UserTestData.*;
 import static edu.alenkin.topjavagraduation.util.JsonUtil.writeValue;
@@ -72,10 +74,11 @@ class UserProfileControllerTest extends AbstractControllerTest {
 
     @Test
     @WithUserDetails(value = USER_MAIL)
-    @Transactional(propagation = Propagation.NOT_SUPPORTED)
+    @Transactional
     void delete() throws Exception {
         perform(MockMvcRequestBuilders.delete(URL))
                 .andExpect(status().isNoContent());
-        Assertions.assertFalse(repository.findById(USER_ID).isPresent());
+
+        assertEquals(repository.findAll(), List.of(admin));
     }
 }

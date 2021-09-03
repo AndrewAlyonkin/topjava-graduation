@@ -4,11 +4,10 @@ import edu.alenkin.topjavagraduation.entity.Restaurant;
 import edu.alenkin.topjavagraduation.service.VoteService;
 import edu.alenkin.topjavagraduation.transferobject.VoteTo;
 import lombok.RequiredArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.lang.Nullable;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -29,36 +28,35 @@ public class AdminVoteController {
 
     private final VoteService service;
 
-    @GetMapping("/restaurant-by")
-    public List<VoteTo> getByRestaurant(@RequestParam(required = false) LocalDate start,
-                                        @RequestParam(required = false) LocalDate end,
-                                        @RequestParam(required = false) LocalDate date,
-                                        @RequestParam int restaurantId){
-        if(start != null && end != null){
-            return service.getByRestaurantBetween(start, end, restaurantId);
-        } else return service.getByDateAndRestaurantId(date, restaurantId);
-    }
-    @GetMapping("/restaurant")
-    public List<VoteTo> getByRestaurant(@RequestParam int restaurantId){
-        return service.getByRestaurantId(restaurantId);
+    @GetMapping("/restaurant/{restId}/between")
+    //https://www.baeldung.com/spring-date-parameters#convert-date-parameters-on-request-level
+    public List<VoteTo> getByRestaurantBetween(@RequestParam @Nullable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
+                                               @RequestParam @Nullable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate,
+                                               @PathVariable int restId) {
+        return service.getByRestaurantBetween(startDate, endDate, restId);
     }
 
-    @GetMapping("/by-date")
-    public List<VoteTo> getAllByDate(@RequestParam LocalDate date){
+    @GetMapping("/restaurant/{restId}/date")
+    public List<VoteTo> getByRestaurantInDate(@RequestParam @Nullable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date,
+                                              @PathVariable int restId) {
+        date = date == null ? LocalDate.now() : date;
+
+        return service.getByDateAndRestaurantId(date, restId);
+    }
+
+    @GetMapping("/restaurant/{restId}")
+    public List<VoteTo> getForRestaurant(@PathVariable int restId) {
+        return service.getByRestaurantId(restId);
+    }
+
+    @GetMapping("/date")
+    public List<VoteTo> getAllInDate(@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
         return service.getAllInDate(date);
     }
-    @GetMapping("/all")
-    public List<VoteTo> getAll(){
-        return service.getAll();
-    }
 
-    @GetMapping("/summary-by")
-    public Map<Restaurant, List<VoteTo>> getSummary(@RequestParam LocalDate date){
-        return service.getAllInDateGroupByRestaurant(date);
-    }
-    @GetMapping("/summary")
-    public Map<Restaurant, List<VoteTo>> getAllVotes(){
-        return service.getAllGroupByRestaurant();
+    @GetMapping
+    public List<VoteTo> getAll() {
+        return service.getAll();
     }
 }
 

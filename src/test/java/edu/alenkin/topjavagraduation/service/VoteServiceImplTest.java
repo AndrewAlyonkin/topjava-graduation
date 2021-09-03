@@ -1,23 +1,21 @@
 package edu.alenkin.topjavagraduation.service;
 
-import edu.alenkin.topjavagraduation.entity.Restaurant;
 import edu.alenkin.topjavagraduation.entity.Vote;
+import edu.alenkin.topjavagraduation.exception.ExpiredVoteTimeException;
 import edu.alenkin.topjavagraduation.transferobject.VoteTo;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.time.LocalDate;
-import java.util.Collections;
+import java.time.*;
+import java.util.Comparator;
 import java.util.List;
-import java.util.Map;
 
 import static edu.alenkin.topjavagraduation.RestaurantTestData.*;
 import static edu.alenkin.topjavagraduation.UserTestData.USER_ID;
 import static edu.alenkin.topjavagraduation.UserTestData.user;
 import static edu.alenkin.topjavagraduation.VoteTestData.*;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertIterableEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -31,10 +29,22 @@ class VoteServiceImplTest extends AbstractServiceTest {
 
     @Test
     void create() {
-        Vote created = service.create(USER_ID, BISON_ID);
+        LocalTime expiration = service.getVoteTimeExpiration();
+        service.setVoteTimeExpiration(LocalTime.MAX);
+        Vote created = service.create(USER_ID, GOLDEN_ID);
+        service.setVoteTimeExpiration(expiration);
+
         int newId = created.id();
-        Vote newVote = new Vote(newId, user, BISON, created.getVoteDateTime());
+        Vote newVote = new Vote(newId, user, GOLDEN, created.getVoteDateTime());
         assertEquals(newVote, created);
+    }
+
+    @Test
+    void createExpired() {
+        LocalTime expiration = service.getVoteTimeExpiration();
+        service.setVoteTimeExpiration(LocalTime.MIN);
+        assertThrows(ExpiredVoteTimeException.class, () -> service.create(USER_ID, GOLDEN_ID));
+        service.setVoteTimeExpiration(expiration);
     }
 
     @Test
@@ -50,9 +60,15 @@ class VoteServiceImplTest extends AbstractServiceTest {
     }
 
     @Test
+    void getByRestaurantBetweenNullable() {
+        var actual = service.getByRestaurantBetween(null, null, GOLDEN_ID);
+        assertIterableEquals(List.of(USER_VOTE_TO2, ADMIN_VOTE_TO2), actual);
+    }
+
+    @Test
     void getAllByUserId() {
         var actual = service.getAllByUserId(USER_ID);
-        assertIterableEquals(List.of(USER_VOTE_TO2, USER_VOTE_TO1), actual);
+        assertEqualsNoDateTime(List.of(USER_VOTE_TO_NOW, USER_VOTE_TO2, USER_VOTE_TO1), actual);
     }
 
     @Test
@@ -70,48 +86,9 @@ class VoteServiceImplTest extends AbstractServiceTest {
     @Test
     void getAll() {
         var actual = service.getAll();
-        assertThat(actual).hasSameElementsAs(allVotes);
-    }
-
-    @Test
-    void getAllInDateGroupByRestaurant() {
-        var actual = service.getAllInDateGroupByRestaurant(august18_10am.toLocalDate());
-        Map<Restaurant, List<VoteTo>> expected = Map.of(
-                BISON, List.of(USER_VOTE_TO1),
-                PRESTIGE, List.of(ADMIN_VOTE_TO1),
-                GOLDEN, Collections.emptyList());
-
-        assertThat(actual).isEqualTo(expected);
-    }
-
-    @Test
-    void getAllGroupByRestaurantId() {
-        var actual = service.getAllGroupByRestaurant();
-        Map<Restaurant, List<VoteTo>> expected = Map.of(
-                BISON, List.of(USER_VOTE_TO1),
-                PRESTIGE, List.of(ADMIN_VOTE_TO1),
-                GOLDEN, List.of(USER_VOTE_TO2, ADMIN_VOTE_TO2));
-        assertThat(actual).isEqualTo(expected);
-    }
-
-    @Test
-    void getRatingInDateGroupByRestaurantName() {
-        var actual = service.getRatingInDateGroupByRestaurantName(august18_10am.toLocalDate());
-        Map<String, Integer> expected = Map.of(
-                BISON.getName(), 1,
-                PRESTIGE.getName(), 1,
-                GOLDEN.getName(), 0);
-        assertThat(actual).isEqualTo(expected);
-    }
-
-    @Test
-    void getRatingsGroupByRestaurantName() {
-        var actual = service.getRatingsGroupByRestaurantName();
-        Map<String, Integer> expected = Map.of(
-                BISON.getName(), 1,
-                PRESTIGE.getName(), 1,
-                GOLDEN.getName(), 2);
-        assertThat(actual).isEqualTo(expected);
+//        assertThat(actual).hasSameElementsAs(allVotes);
+        actual.sort(Comparator.comparing(VoteTo::getDateTime).reversed());
+        assertEqualsNoDateTime(actual, allVotes);
     }
 
     @Test

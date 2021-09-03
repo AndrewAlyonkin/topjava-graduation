@@ -1,41 +1,113 @@
 package edu.alenkin.topjavagraduation.rest.controller.v1.vote;
 
-import org.junit.jupiter.api.BeforeEach;
+import edu.alenkin.topjavagraduation.JsonMatchers;
+import edu.alenkin.topjavagraduation.rest.controller.v1.AbstractControllerTest;
+import edu.alenkin.topjavagraduation.transferobject.VoteTo;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithUserDetails;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import static org.junit.jupiter.api.Assertions.*;
+import java.util.Comparator;
+import java.util.List;
+
+import static edu.alenkin.topjavagraduation.RestaurantTestData.*;
+import static edu.alenkin.topjavagraduation.UserTestData.ADMIN_MAIL;
+import static edu.alenkin.topjavagraduation.UserTestData.USER_MAIL;
+import static edu.alenkin.topjavagraduation.VoteTestData.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 /**
  * @author Alenkin Andrew
  * oxqq@ya.ru
  */
-class AdminVoteControllerTest {
+class AdminVoteControllerTest extends AbstractControllerTest {
 
-    @BeforeEach
-    void setUp() {
+    static final String URL = "/rest/v1/admin/votes/";
+
+    @Test
+    @WithUserDetails(value = ADMIN_MAIL)
+    void getByRestaurantBetween() throws Exception {
+        System.out.println(august18_10am.toLocalDate().toString());
+        perform(MockMvcRequestBuilders.get(URL + "restaurant/" + BISON_ID + "/between")
+                .param("startDate", "2021-08-18")
+                .param("endDate", "2021-08-18"))
+                .andExpect(status().isOk())
+                .andDo(print())
+                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+                .andExpect(JsonMatchers.jsonMatcher(List.of(USER_VOTE_TO1), VoteTo.class, Assertions::assertEquals));
     }
 
     @Test
-    void getByRestaurant() {
+    @WithUserDetails(value = ADMIN_MAIL)
+    void getByRestaurantBetweenNullable() throws Exception {
+        perform(MockMvcRequestBuilders.get(URL + "restaurant/" + GOLDEN_ID + "/between"))
+                .andExpect(status().isOk())
+                .andDo(print())
+                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+                .andExpect(JsonMatchers.jsonMatcher(List.of(USER_VOTE_TO2, ADMIN_VOTE_TO2), VoteTo.class, Assertions::assertEquals));
     }
 
     @Test
-    void testGetByRestaurant() {
+    @WithUserDetails(value = ADMIN_MAIL)
+    void getByRestaurantInDate() throws Exception {
+        perform(MockMvcRequestBuilders.get(URL + "/restaurant/" + PRESTIGE_ID + "/date")
+                .param("date", "2021-08-18"))
+                .andExpect(status().isOk())
+                .andDo(print())
+                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+                .andExpect(JsonMatchers.jsonMatcher(List.of(ADMIN_VOTE_TO1), VoteTo.class, Assertions::assertEquals));
     }
 
     @Test
-    void getAllByDate() {
+    void getByRestaurantUnauthorized() throws Exception {
+        perform(MockMvcRequestBuilders.get(URL + "/restaurant/" + PRESTIGE_ID + "/date"))
+                .andExpect(status().isUnauthorized());
     }
 
     @Test
-    void getAll() {
+    @WithUserDetails(value = USER_MAIL)
+    void getByRestaurantWithUser() throws Exception {
+        perform(MockMvcRequestBuilders.get(URL + "/restaurant/" + PRESTIGE_ID + "/date"))
+                .andExpect(status().isForbidden());
     }
 
     @Test
-    void getSummary() {
+    @WithUserDetails(value = ADMIN_MAIL)
+    void getForRestaurant() throws Exception {
+        perform(MockMvcRequestBuilders.get(URL + "/restaurant/" + GOLDEN_ID))
+                .andExpect(status().isOk())
+                .andDo(print())
+                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+                .andExpect(JsonMatchers.jsonMatcher(List.of(USER_VOTE_TO2, ADMIN_VOTE_TO2), VoteTo.class, Assertions::assertEquals));
     }
 
     @Test
-    void getAllVotes() {
+    @WithUserDetails(value = ADMIN_MAIL)
+    void getAllInDate() throws Exception {
+        perform(MockMvcRequestBuilders.get(URL + "/date")
+                .param("date", "2021-08-18"))
+                .andExpect(status().isOk())
+                .andDo(print())
+                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+                .andExpect(JsonMatchers.jsonMatcher(List.of(USER_VOTE_TO1, ADMIN_VOTE_TO1), VoteTo.class, Assertions::assertEquals));
+    }
+
+    @Test
+    @WithUserDetails(value = ADMIN_MAIL)
+    void getAll() throws Exception {
+        perform(MockMvcRequestBuilders.get(URL))
+                .andExpect(status().isOk())
+                .andDo(print())
+                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+                .andExpect(JsonMatchers.jsonMatcher(allVotes, VoteTo.class,
+                        (actual, expected) -> {
+                            actual.sort(Comparator.comparing(VoteTo::getDateTime).reversed());
+                            assertEqualsNoDateTime(actual, expected);
+                        }
+                        ));
     }
 }

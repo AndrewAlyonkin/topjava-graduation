@@ -35,18 +35,20 @@ public interface VoteRepository extends JpaRepository<Vote, Integer> {
                                     @Param("endDateTime") LocalDateTime endDateTime);
 
     @Query("""
-            SELECT v FROM Vote v 
+            SELECT v FROM Vote v
             WHERE v.restaurant.id=:restaurantId
-            AND v.voteDateTime <=:endDateTime
             AND v.voteDateTime >=:startDateTime
+            AND v.voteDateTime <=:endDateTime
             """)
-    List<Vote> getAllForRestaurantInDate(@Param("startDateTime") LocalDateTime startDate, @Param("endDateTime") LocalDateTime endDate, @Param("restaurantId") int restaurantId);
+    List<Vote> getAllForRestaurantInBetween(@Param("startDateTime") LocalDateTime startDateTime,
+                                            @Param("endDateTime") LocalDateTime endDateTime,
+                                            @Param("restaurantId") int restaurantId);
 
     @Query("SELECT v FROM Vote v WHERE v.restaurant.id=:restaurantId")
     List<Vote> getAllForRestaurant(@Param("restaurantId") int restaurantId);
 
 
-    @Query("SELECT v FROM Vote v WHERE v.voteDateTime <=:endDate AND v.voteDateTime >=:startDate")
+    @Query("SELECT v FROM Vote v WHERE v.voteDateTime <=:endDate AND v.voteDateTime >=:startDate ORDER BY v.voteDateTime DESC")
     List<Vote> getAllByDate(@Param("startDate") LocalDateTime startDate, @Param("endDate") LocalDateTime endDate);
 
 }

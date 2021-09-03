@@ -14,7 +14,6 @@ import java.time.LocalTime;
  */
 @UtilityClass
 public class ValidationUtil {
-    private static final LocalTime VOTE_TIME_EXPIRATION = LocalTime.of(11, 0);
 
     public static <T> T checkNotFoundWithId(T object, int id) {
         return checkNotFound(object, "id = " + id);
@@ -49,8 +48,8 @@ public class ValidationUtil {
         }
     }
 
-    public static void checkTimeExpiration(LocalTime time) {
-        if (time.isAfter(VOTE_TIME_EXPIRATION)) {
+    public static void checkTimeExpiration(LocalTime time, LocalTime expiration) {
+        if (time.isAfter(expiration)) {
             throw new ExpiredVoteTimeException("You can not change your vote");
         }
     }

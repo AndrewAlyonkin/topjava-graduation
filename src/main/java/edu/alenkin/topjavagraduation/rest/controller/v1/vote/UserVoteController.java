@@ -5,6 +5,7 @@ import edu.alenkin.topjavagraduation.service.VoteService;
 import edu.alenkin.topjavagraduation.transferobject.VoteTo;
 import edu.alenkin.topjavagraduation.util.VoteUtil;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -14,7 +15,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Map;
 
 import static edu.alenkin.topjavagraduation.rest.controller.v1.vote.UserVoteController.REST_URL;
 
@@ -31,10 +31,10 @@ public class UserVoteController {
 
     private final VoteService service;
 
-    @PostMapping
-    public ResponseEntity<VoteTo> create(@RequestParam("restaurantId") int restaurantId,
-                                         @AuthenticationPrincipal AuthorizedUser authorizedUser){
-        VoteTo created = VoteUtil.asTo(service.create(authorizedUser.getId(),restaurantId));
+    @PostMapping(value = "/{restId}")
+    public ResponseEntity<VoteTo> create(@PathVariable int restId,
+                                         @AuthenticationPrincipal AuthorizedUser authorizedUser) {
+        VoteTo created = VoteUtil.asTo(service.create(authorizedUser.getId(), restId));
         URI uriOfNewResource = ServletUriComponentsBuilder
                 .fromCurrentContextPath()
                 .path(REST_URL + "/{id}")
@@ -42,27 +42,20 @@ public class UserVoteController {
                 .toUri();
         return ResponseEntity.created(uriOfNewResource).body(created);
     }
-    @PutMapping
-    public VoteTo update(@RequestParam ("restaurantId") int restaurantId,
-                          @AuthenticationPrincipal AuthorizedUser authorizedUser){
-        return VoteUtil.asTo(service.create(authorizedUser.getId(),restaurantId));
+
+    @PutMapping(value = "/{restId}")
+    @ResponseStatus(value = HttpStatus.NO_CONTENT)
+    public VoteTo update(@PathVariable int restId,
+                         @AuthenticationPrincipal AuthorizedUser authorizedUser) {
+        return VoteUtil.asTo(service.create(authorizedUser.getId(), restId));
     }
 
     @GetMapping
+    @ResponseStatus(value = HttpStatus.OK)
     public List<VoteTo> getOwnVotes(@AuthenticationPrincipal AuthorizedUser authorizedUser,
-                                    @RequestParam(required = false) LocalDate date){
-        if(date == null) {
+                                    @RequestParam(required = false) LocalDate date) {
+        if (date == null) {
             return service.getAllByUserId(authorizedUser.getId());
         } else return service.getByUserIdAndDate(authorizedUser.getId(), date);
-    }
-
-    @GetMapping("/rating-on-date")
-    public Map<String, Integer> getRatingBy(@RequestParam LocalDate date){
-        return service.getRatingInDateGroupByRestaurantName(date);
-    }
-
-    @GetMapping("/rating")
-    public Map<String, Integer> getRating(){
-        return service.getRatingsGroupByRestaurantName();
     }
 }
