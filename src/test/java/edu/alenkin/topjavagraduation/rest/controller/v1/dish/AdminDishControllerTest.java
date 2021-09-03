@@ -2,7 +2,7 @@ package edu.alenkin.topjavagraduation.rest.controller.v1.dish;
 
 import edu.alenkin.topjavagraduation.DishTestData;
 import edu.alenkin.topjavagraduation.JsonMatchers;
-import edu.alenkin.topjavagraduation.entity.Dish;
+import edu.alenkin.topjavagraduation.model.Dish;
 import edu.alenkin.topjavagraduation.repository.DishRepository;
 import edu.alenkin.topjavagraduation.rest.controller.v1.AbstractControllerTest;
 import org.junit.jupiter.api.Assertions;
@@ -19,7 +19,7 @@ import static edu.alenkin.topjavagraduation.RestaurantTestData.BISON_ID;
 import static edu.alenkin.topjavagraduation.RestaurantTestData.GOLDEN_ID;
 import static edu.alenkin.topjavagraduation.UserTestData.ADMIN_MAIL;
 import static edu.alenkin.topjavagraduation.UserTestData.USER_MAIL;
-import static edu.alenkin.topjavagraduation.entity.AbstractBaseEntity.START_SEQ;
+import static edu.alenkin.topjavagraduation.model.AbstractBaseEntity.START_SEQ;
 import static edu.alenkin.topjavagraduation.util.JsonUtil.writeValue;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;

@@ -1,4 +1,5 @@
-
+[![Build Status](https://app.travis-ci.com/AndrewAlyonkin/topjava-graduation.svg?token=jfYqsL5WSinFLfXxitzZ&branch=master)](https://app.travis-ci.com/AndrewAlyonkin/topjava-graduation)  
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/7c7cc798334646b9b1a7c94f75479aad)](https://www.codacy.com/gh/AndrewAlyonkin/topjava-graduation/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=AndrewAlyonkin/topjava-graduation&amp;utm_campaign=Badge_Grade)
 ----------------------------------------
 Documentation: http://localhost:8080/swagger-ui.html
 --------------------------------------------

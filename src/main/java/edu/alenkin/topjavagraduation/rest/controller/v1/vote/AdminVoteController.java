@@ -1,6 +1,5 @@
 package edu.alenkin.topjavagraduation.rest.controller.v1.vote;
 
-import edu.alenkin.topjavagraduation.entity.Restaurant;
 import edu.alenkin.topjavagraduation.service.VoteService;
 import edu.alenkin.topjavagraduation.transferobject.VoteTo;
 import io.swagger.annotations.Api;
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Map;
 
 import static edu.alenkin.topjavagraduation.rest.controller.v1.vote.AdminVoteController.REST_URL;
 

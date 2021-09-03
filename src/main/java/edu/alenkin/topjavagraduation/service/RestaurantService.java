@@ -1,6 +1,6 @@
 package edu.alenkin.topjavagraduation.service;
 
-import edu.alenkin.topjavagraduation.entity.Restaurant;
+import edu.alenkin.topjavagraduation.model.Restaurant;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 

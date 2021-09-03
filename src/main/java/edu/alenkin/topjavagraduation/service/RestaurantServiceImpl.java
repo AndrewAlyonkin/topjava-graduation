@@ -1,6 +1,6 @@
 package edu.alenkin.topjavagraduation.service;
 
-import edu.alenkin.topjavagraduation.entity.Restaurant;
+import edu.alenkin.topjavagraduation.model.Restaurant;
 import edu.alenkin.topjavagraduation.exception.NotFoundException;
 import edu.alenkin.topjavagraduation.repository.RestaurantRepository;
 import lombok.RequiredArgsConstructor;

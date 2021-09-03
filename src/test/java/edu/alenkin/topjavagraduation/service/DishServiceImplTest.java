@@ -1,6 +1,6 @@
 package edu.alenkin.topjavagraduation.service;
 
-import edu.alenkin.topjavagraduation.entity.Dish;
+import edu.alenkin.topjavagraduation.model.Dish;
 import edu.alenkin.topjavagraduation.exception.NotFoundException;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +14,7 @@ import static edu.alenkin.topjavagraduation.DishTestData.getNew;
 import static edu.alenkin.topjavagraduation.DishTestData.getUpdated;
 import static edu.alenkin.topjavagraduation.DishTestData.*;
 import static edu.alenkin.topjavagraduation.RestaurantTestData.*;
-import static edu.alenkin.topjavagraduation.entity.AbstractBaseEntity.START_SEQ;
+import static edu.alenkin.topjavagraduation.model.AbstractBaseEntity.START_SEQ;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;

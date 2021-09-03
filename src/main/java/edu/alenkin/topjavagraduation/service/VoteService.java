@@ -1,6 +1,6 @@
 package edu.alenkin.topjavagraduation.service;
 
-import edu.alenkin.topjavagraduation.entity.Vote;
+import edu.alenkin.topjavagraduation.model.Vote;
 import edu.alenkin.topjavagraduation.transferobject.VoteTo;
 
 import java.time.LocalDate;

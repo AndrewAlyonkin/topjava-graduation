@@ -2,7 +2,7 @@ package edu.alenkin.topjavagraduation.rest.controller.v1.restaurant;
 
 import edu.alenkin.topjavagraduation.JsonMatchers;
 import edu.alenkin.topjavagraduation.RestaurantTestData;
-import edu.alenkin.topjavagraduation.entity.Restaurant;
+import edu.alenkin.topjavagraduation.model.Restaurant;
 import edu.alenkin.topjavagraduation.rest.controller.v1.AbstractControllerTest;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

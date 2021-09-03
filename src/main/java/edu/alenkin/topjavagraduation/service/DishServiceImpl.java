@@ -1,13 +1,12 @@
 package edu.alenkin.topjavagraduation.service;
 
-import edu.alenkin.topjavagraduation.entity.Dish;
-import edu.alenkin.topjavagraduation.entity.Restaurant;
+import edu.alenkin.topjavagraduation.model.Dish;
+import edu.alenkin.topjavagraduation.model.Restaurant;
 import edu.alenkin.topjavagraduation.exception.NotFoundException;
 import edu.alenkin.topjavagraduation.repository.DishRepository;
 import edu.alenkin.topjavagraduation.repository.RestaurantRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.validation.constraints.NotNull;

@@ -1,6 +1,6 @@
 package edu.alenkin.topjavagraduation.repository;
 
-import edu.alenkin.topjavagraduation.entity.User;
+import edu.alenkin.topjavagraduation.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;

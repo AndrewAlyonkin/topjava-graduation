@@ -1,6 +1,6 @@
 package edu.alenkin.topjavagraduation.service;
 
-import edu.alenkin.topjavagraduation.entity.User;
+import edu.alenkin.topjavagraduation.model.User;
 import edu.alenkin.topjavagraduation.transferobject.UserTo;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

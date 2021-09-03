@@ -1,6 +1,6 @@
 package edu.alenkin.topjavagraduation.service;
 
-import edu.alenkin.topjavagraduation.entity.User;
+import edu.alenkin.topjavagraduation.model.User;
 import edu.alenkin.topjavagraduation.repository.UserRepository;
 import edu.alenkin.topjavagraduation.security.AuthorizedUser;
 import edu.alenkin.topjavagraduation.transferobject.UserTo;

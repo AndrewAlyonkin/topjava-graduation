@@ -1,6 +1,6 @@
 package edu.alenkin.topjavagraduation.rest.controller.v1.restaurant;
 
-import edu.alenkin.topjavagraduation.entity.Restaurant;
+import edu.alenkin.topjavagraduation.model.Restaurant;
 import edu.alenkin.topjavagraduation.service.RestaurantService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

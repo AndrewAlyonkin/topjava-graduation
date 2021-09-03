@@ -1,12 +1,12 @@
 package edu.alenkin.topjavagraduation;
 
-import edu.alenkin.topjavagraduation.entity.Dish;
+import edu.alenkin.topjavagraduation.model.Dish;
 
 import java.time.LocalDate;
 import java.util.List;
 
 import static edu.alenkin.topjavagraduation.RestaurantTestData.*;
-import static edu.alenkin.topjavagraduation.entity.AbstractBaseEntity.START_SEQ;
+import static edu.alenkin.topjavagraduation.model.AbstractBaseEntity.START_SEQ;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**

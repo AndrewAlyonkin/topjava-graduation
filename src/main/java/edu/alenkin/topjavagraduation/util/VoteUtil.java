@@ -1,6 +1,6 @@
 package edu.alenkin.topjavagraduation.util;
 
-import edu.alenkin.topjavagraduation.entity.Vote;
+import edu.alenkin.topjavagraduation.model.Vote;
 import edu.alenkin.topjavagraduation.transferobject.VoteTo;
 import lombok.experimental.UtilityClass;
 

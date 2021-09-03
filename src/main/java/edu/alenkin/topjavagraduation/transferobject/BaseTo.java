@@ -1,6 +1,6 @@
 package edu.alenkin.topjavagraduation.transferobject;
 
-import edu.alenkin.topjavagraduation.entity.HasId;
+import edu.alenkin.topjavagraduation.model.HasId;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

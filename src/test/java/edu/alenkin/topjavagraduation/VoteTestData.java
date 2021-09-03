@@ -8,7 +8,7 @@ import java.util.List;
 import static edu.alenkin.topjavagraduation.RestaurantTestData.*;
 import static edu.alenkin.topjavagraduation.UserTestData.admin;
 import static edu.alenkin.topjavagraduation.UserTestData.user;
-import static edu.alenkin.topjavagraduation.entity.AbstractBaseEntity.START_SEQ;
+import static edu.alenkin.topjavagraduation.model.AbstractBaseEntity.START_SEQ;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**

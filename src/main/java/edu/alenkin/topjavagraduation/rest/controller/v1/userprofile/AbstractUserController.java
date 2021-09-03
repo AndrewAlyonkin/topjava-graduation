@@ -1,6 +1,6 @@
 package edu.alenkin.topjavagraduation.rest.controller.v1.userprofile;
 
-import edu.alenkin.topjavagraduation.entity.User;
+import edu.alenkin.topjavagraduation.model.User;
 import edu.alenkin.topjavagraduation.service.UserService;
 import edu.alenkin.topjavagraduation.transferobject.UserTo;
 import edu.alenkin.topjavagraduation.util.UserUtil;

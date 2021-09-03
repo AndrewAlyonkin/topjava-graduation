@@ -1,12 +1,12 @@
 package edu.alenkin.topjavagraduation;
 
-import edu.alenkin.topjavagraduation.entity.Role;
-import edu.alenkin.topjavagraduation.entity.User;
+import edu.alenkin.topjavagraduation.model.Role;
+import edu.alenkin.topjavagraduation.model.User;
 
 import java.util.Collections;
 import java.util.Date;
 
-import static edu.alenkin.topjavagraduation.entity.AbstractBaseEntity.START_SEQ;
+import static edu.alenkin.topjavagraduation.model.AbstractBaseEntity.START_SEQ;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**

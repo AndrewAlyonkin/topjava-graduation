@@ -1,6 +1,6 @@
 package edu.alenkin.topjavagraduation.rest.controller.v1.dish;
 
-import edu.alenkin.topjavagraduation.entity.Dish;
+import edu.alenkin.topjavagraduation.model.Dish;
 import edu.alenkin.topjavagraduation.service.DishService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

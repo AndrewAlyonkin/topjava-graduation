@@ -1,6 +1,6 @@
 package edu.alenkin.topjavagraduation.service;
 
-import edu.alenkin.topjavagraduation.entity.Vote;
+import edu.alenkin.topjavagraduation.model.Vote;
 import edu.alenkin.topjavagraduation.repository.RestaurantRepository;
 import edu.alenkin.topjavagraduation.repository.UserRepository;
 import edu.alenkin.topjavagraduation.repository.VoteRepository;

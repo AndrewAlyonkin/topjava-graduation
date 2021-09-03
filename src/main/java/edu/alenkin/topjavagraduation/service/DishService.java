@@ -1,6 +1,6 @@
 package edu.alenkin.topjavagraduation.service;
 
-import edu.alenkin.topjavagraduation.entity.Dish;
+import edu.alenkin.topjavagraduation.model.Dish;
 
 import javax.validation.constraints.NotNull;
 import java.util.List;

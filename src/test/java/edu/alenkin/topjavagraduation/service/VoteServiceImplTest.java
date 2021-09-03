@@ -1,6 +1,6 @@
 package edu.alenkin.topjavagraduation.service;
 
-import edu.alenkin.topjavagraduation.entity.Vote;
+import edu.alenkin.topjavagraduation.model.Vote;
 import edu.alenkin.topjavagraduation.exception.ExpiredVoteTimeException;
 import edu.alenkin.topjavagraduation.transferobject.VoteTo;
 import org.junit.jupiter.api.Test;

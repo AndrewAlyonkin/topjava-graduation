@@ -1,4 +1,4 @@
-package edu.alenkin.topjavagraduation.entity;
+package edu.alenkin.topjavagraduation.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import io.swagger.annotations.ApiModel;

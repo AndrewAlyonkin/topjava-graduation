@@ -1,6 +1,6 @@
 package edu.alenkin.topjavagraduation.transferobject;
 
-import edu.alenkin.topjavagraduation.entity.Vote;
+import edu.alenkin.topjavagraduation.model.Vote;
 import lombok.*;
 
 import javax.validation.constraints.NotNull;

@@ -1,4 +1,4 @@
-package edu.alenkin.topjavagraduation.entity;
+package edu.alenkin.topjavagraduation.model;
 
 import org.springframework.util.Assert;
 

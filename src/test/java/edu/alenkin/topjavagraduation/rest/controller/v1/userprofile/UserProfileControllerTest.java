@@ -2,7 +2,7 @@ package edu.alenkin.topjavagraduation.rest.controller.v1.userprofile;
 
 import edu.alenkin.topjavagraduation.JsonMatchers;
 import edu.alenkin.topjavagraduation.UserTestData;
-import edu.alenkin.topjavagraduation.entity.User;
+import edu.alenkin.topjavagraduation.model.User;
 import edu.alenkin.topjavagraduation.repository.UserRepository;
 import edu.alenkin.topjavagraduation.rest.controller.v1.AbstractControllerTest;
 import org.junit.jupiter.api.Assertions;

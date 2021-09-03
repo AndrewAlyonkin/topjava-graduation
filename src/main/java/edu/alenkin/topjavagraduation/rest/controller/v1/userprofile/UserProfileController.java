@@ -1,6 +1,6 @@
 package edu.alenkin.topjavagraduation.rest.controller.v1.userprofile;
 
-import edu.alenkin.topjavagraduation.entity.User;
+import edu.alenkin.topjavagraduation.model.User;
 import edu.alenkin.topjavagraduation.security.AuthorizedUser;
 import edu.alenkin.topjavagraduation.transferobject.UserTo;
 import io.swagger.annotations.Api;
