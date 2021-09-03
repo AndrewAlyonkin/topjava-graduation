@@ -2,7 +2,15 @@
 language: java
 jdk: openjdk16
 
+#https://dzone.com/articles/travis-ci-tutorial-java-projects
+cache:
+  directories:
+    - $HOME/.m2
+
 # https://docs.travis-ci.com/user/customizing-the-build#Building-Specific-Branches
 branches:
   only:
     - master
+
+before_install:
+  - chmod +x mvnw
