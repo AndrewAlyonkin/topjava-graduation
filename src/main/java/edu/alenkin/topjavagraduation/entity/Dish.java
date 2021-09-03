@@ -1,5 +1,7 @@
 package edu.alenkin.topjavagraduation.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -35,6 +37,7 @@ public class Dish extends AbstractNamedEntity {
     @JoinColumn(name = "restaurant_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @NotNull
+    @JsonBackReference(value = "menu")
     private Restaurant restaurant;
 
     public Dish(String name, Integer price, LocalDate date, Restaurant restaurant) {

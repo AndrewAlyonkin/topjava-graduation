@@ -1,5 +1,6 @@
 package edu.alenkin.topjavagraduation.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -29,6 +30,7 @@ public class Restaurant extends AbstractNamedEntity implements HasId {
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "restaurant")
     @Fetch(value = FetchMode.SUBSELECT)
+    @JsonManagedReference(value = "menu")
     private List<Dish> menu;
 
     public Restaurant(String name) {

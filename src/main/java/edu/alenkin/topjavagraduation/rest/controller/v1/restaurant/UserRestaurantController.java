@@ -26,8 +26,8 @@ public class UserRestaurantController extends AbstractRestaurantController {
     }
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Restaurant getById(@PathVariable int id) {
-        return super.getById(id);
+    public Restaurant get(@PathVariable int id) {
+        return super.get(id);
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
@@ -35,13 +35,13 @@ public class UserRestaurantController extends AbstractRestaurantController {
         return super.getAll();
     }
 
-    @GetMapping(value = "/now",produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Restaurant> getAllOnNow() {
+    @GetMapping(value = "/today",produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<Restaurant> getAllWithMenuForToday() {
         return super.gwtAllWithDishes(LocalDate.now());
     }
 
     @GetMapping(value = "/date",produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Restaurant> getAllForDate(@RequestParam @Nullable LocalDate date) {
+    public List<Restaurant> getAllWithMenuForDate(@RequestParam @Nullable LocalDate date) {
         return super.gwtAllWithDishes(date == null ? LocalDate.now() : date);
     }
 }

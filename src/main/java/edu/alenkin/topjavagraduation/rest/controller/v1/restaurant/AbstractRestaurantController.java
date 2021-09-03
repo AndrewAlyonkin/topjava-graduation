@@ -24,7 +24,7 @@ public class AbstractRestaurantController {
         return service.create(restaurant);
     }
 
-    public Restaurant getById(int id) {
+    public Restaurant get(int id) {
         return service.get(id);
     }
 
