@@ -12,6 +12,7 @@ import org.springframework.lang.Nullable;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import static edu.alenkin.topjavagraduation.rest.controller.v1.vote.AdminVoteController.REST_URL;
@@ -45,10 +46,10 @@ public class AdminVoteController {
     @GetMapping("/restaurant/{restId}/date")
     public List<VoteTo> getByRestaurantInDate(@RequestParam @Nullable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date,
                                               @PathVariable int restId) {
-        date = date == null ? LocalDate.now() : date;
+        LocalDate currentDate = (date == null) ? LocalDate.now() : date;
 
-        log.info("Get votes for restaurant {} in {}", restId, date);
-        return service.getByDateAndRestaurantId(date, restId);
+        log.info("Get votes for restaurant {} in {}", restId, currentDate);
+        return service.getByDateAndRestaurantId(currentDate, restId);
     }
 
     @ApiOperation(value = "Get all votes for restaurant with required ID", response = Iterable.class)
