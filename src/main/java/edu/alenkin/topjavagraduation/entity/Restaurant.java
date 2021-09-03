@@ -1,6 +1,8 @@
 package edu.alenkin.topjavagraduation.entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -20,6 +22,7 @@ import java.util.List;
  * The restaurant contains a menu that is filled in by the administrator and is updated every day.
  */
 
+@ApiModel(value = "The restaurant contains a menu that is filled in by the administrator and is updated every day")
 @Entity
 @Table(name = "restaurant")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)

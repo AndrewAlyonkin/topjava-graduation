@@ -1,5 +1,6 @@
 package edu.alenkin.topjavagraduation.entity;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,6 +24,7 @@ import javax.validation.constraints.Size;
 @AllArgsConstructor
 public abstract class AbstractNamedEntity extends AbstractBaseEntity {
 
+    @ApiModelProperty(example = "entity_name")
     @NotBlank
     @Size(min = 2, max = 100)
     @Column(name = "name", nullable = false)

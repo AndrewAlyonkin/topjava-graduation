@@ -3,6 +3,8 @@ package edu.alenkin.topjavagraduation.rest.controller.v1.vote;
 import edu.alenkin.topjavagraduation.entity.Restaurant;
 import edu.alenkin.topjavagraduation.service.VoteService;
 import edu.alenkin.topjavagraduation.transferobject.VoteTo;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -20,6 +22,7 @@ import static edu.alenkin.topjavagraduation.rest.controller.v1.vote.AdminVoteCon
  * @author Alenkin Andrew
  * oxqq@ya.ru
  */
+@Api(value = "Admin vote controller", tags = {"Admin CRUD operations with votes"})
 @RestController
 @RequestMapping(value = REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 @RequiredArgsConstructor
@@ -30,6 +33,7 @@ public class AdminVoteController {
 
     private final VoteService service;
 
+    @ApiOperation(value = "Get all votes for required restaurant between current start and end dates", response = Iterable.class)
     @GetMapping("/restaurant/{restId}/between")
     //https://www.baeldung.com/spring-date-parameters#convert-date-parameters-on-request-level
     public List<VoteTo> getByRestaurantBetween(@RequestParam @Nullable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
@@ -39,6 +43,7 @@ public class AdminVoteController {
         return service.getByRestaurantBetween(startDate, endDate, restId);
     }
 
+    @ApiOperation(value = "Get all votes for restaurant in current day", response = Iterable.class)
     @GetMapping("/restaurant/{restId}/date")
     public List<VoteTo> getByRestaurantInDate(@RequestParam @Nullable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date,
                                               @PathVariable int restId) {
@@ -48,18 +53,21 @@ public class AdminVoteController {
         return service.getByDateAndRestaurantId(date, restId);
     }
 
+    @ApiOperation(value = "Get all votes for restaurant with required ID", response = Iterable.class)
     @GetMapping("/restaurant/{restId}")
     public List<VoteTo> getForRestaurant(@PathVariable int restId) {
         log.info("Get votes for restaurant with id {}", restId);
         return service.getByRestaurantId(restId);
     }
 
+    @ApiOperation(value = "Get all votes for all restaurants in current date", response = Iterable.class)
     @GetMapping("/date")
     public List<VoteTo> getAllInDate(@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
         log.info("Get all votes in {}", date);
         return service.getAllInDate(date);
     }
 
+    @ApiOperation(value = "Get all votes for all restaurants", response = Iterable.class)
     @GetMapping
     public List<VoteTo> getAll() {
         log.info("Get all votes");

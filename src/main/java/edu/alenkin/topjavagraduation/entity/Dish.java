@@ -2,6 +2,8 @@ package edu.alenkin.topjavagraduation.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -17,6 +19,7 @@ import java.time.LocalDate;
  * Represents food on the restaurant menu.
  */
 
+@ApiModel(value = "The food on the restaurant menu")
 @Entity
 @Table(name = "dish")
 @Setter
@@ -26,9 +29,11 @@ import java.time.LocalDate;
 @ToString(includeFieldNames = false, exclude = "restaurant")
 public class Dish extends AbstractNamedEntity {
 
+    @ApiModelProperty(example = "1000")
     @Column(name = "price")
     private Integer price;
 
+    @ApiModelProperty(example = "2021-09-03")
     @Column(name = "date")
     @NotNull
     private LocalDate date = LocalDate.now();

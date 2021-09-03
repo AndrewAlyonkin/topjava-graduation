@@ -1,5 +1,6 @@
 package edu.alenkin.topjavagraduation.entity;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,6 +27,7 @@ import javax.persistence.*;
 public abstract class AbstractBaseEntity implements HasId {
     public static final int START_SEQ = 100000;
 
+    @ApiModelProperty(example = "5")
     @Id
     @SequenceGenerator(name = "global_seq", sequenceName = "global_seq", allocationSize = 1, initialValue = START_SEQ)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "global_seq")
