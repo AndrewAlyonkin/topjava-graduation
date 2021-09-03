@@ -1,5 +1,6 @@
 package edu.alenkin.topjavagraduation;
 
+import edu.alenkin.topjavagraduation.entity.Dish;
 import edu.alenkin.topjavagraduation.entity.Role;
 import edu.alenkin.topjavagraduation.entity.User;
 
@@ -7,6 +8,7 @@ import java.util.Collections;
 import java.util.Date;
 
 import static edu.alenkin.topjavagraduation.entity.AbstractBaseEntity.START_SEQ;
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Alenkin Andrew
@@ -23,9 +25,12 @@ public class UserTestData {
     public static final User user = new User(USER_ID, "User", "user@gmail.com", "password", Role.USER);
     public static final User admin = new User(ADMIN_ID, "Admin", "admin@gmail.com", "admin", Role.ADMIN, Role.USER);
 
+    public static void assertNoIdAndPasswordAndRegisteredEquals(User actual, User expected) {
+        assertThat(actual).usingRecursiveComparison().ignoringFields("id", "password", "registered").isEqualTo(expected);
+    }
 
     public static User getNew() {
-        return new User(null, "New", "new@gmail.com", "newPass", false, new Date(), Collections.singleton(Role.USER));
+        return new User(null, "New", "new@gmail.com", "newPass", true, new Date(), Collections.singleton(Role.USER));
     }
 
     public static User getUpdated() {

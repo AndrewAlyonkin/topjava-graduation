@@ -2,7 +2,6 @@ package edu.alenkin.topjavagraduation.rest.controller.v1.userprofile;
 
 import edu.alenkin.topjavagraduation.entity.User;
 import edu.alenkin.topjavagraduation.security.AuthorizedUser;
-import edu.alenkin.topjavagraduation.service.UserService;
 import edu.alenkin.topjavagraduation.transferobject.UserTo;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -49,7 +48,7 @@ public class UserProfileController extends AbstractUserController {
     @DeleteMapping
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public void delete(@AuthenticationPrincipal AuthorizedUser authorizedUser) {
-        super.delete(authorizedUser.getUserTo().getId());
+        super.delete(authorizedUser.getId());
     }
 }
 

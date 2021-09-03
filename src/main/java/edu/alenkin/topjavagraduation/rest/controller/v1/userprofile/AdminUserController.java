@@ -46,14 +46,14 @@ public class AdminUserController extends AbstractUserController {
     }
 
     @Override
-    @GetMapping("/with-email")
+    @GetMapping("/email")
     public User getByEmail(@RequestParam String email) {
         return super.getByEmail(email);
     }
 
     @Override
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseStatus(value = HttpStatus.OK)
+    @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public User update(@RequestBody @Valid User user, @PathVariable int id) {
         return super.update(user, id);
     }
