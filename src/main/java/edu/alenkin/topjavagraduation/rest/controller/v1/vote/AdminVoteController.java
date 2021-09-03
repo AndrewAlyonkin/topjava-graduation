@@ -4,6 +4,7 @@ import edu.alenkin.topjavagraduation.entity.Restaurant;
 import edu.alenkin.topjavagraduation.service.VoteService;
 import edu.alenkin.topjavagraduation.transferobject.VoteTo;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.MediaType;
 import org.springframework.lang.Nullable;
@@ -22,6 +23,7 @@ import static edu.alenkin.topjavagraduation.rest.controller.v1.vote.AdminVoteCon
 @RestController
 @RequestMapping(value = REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 @RequiredArgsConstructor
+@Slf4j
 public class AdminVoteController {
 
     static final String REST_URL = "/rest/v1/admin/votes";
@@ -33,6 +35,7 @@ public class AdminVoteController {
     public List<VoteTo> getByRestaurantBetween(@RequestParam @Nullable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
                                                @RequestParam @Nullable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate,
                                                @PathVariable int restId) {
+        log.info("Get votes for restaurant {} between {} and {}", restId, startDate, endDate);
         return service.getByRestaurantBetween(startDate, endDate, restId);
     }
 
@@ -41,21 +44,25 @@ public class AdminVoteController {
                                               @PathVariable int restId) {
         date = date == null ? LocalDate.now() : date;
 
+        log.info("Get votes for restaurant {} in {}", restId, date);
         return service.getByDateAndRestaurantId(date, restId);
     }
 
     @GetMapping("/restaurant/{restId}")
     public List<VoteTo> getForRestaurant(@PathVariable int restId) {
+        log.info("Get votes for restaurant with id {}", restId);
         return service.getByRestaurantId(restId);
     }
 
     @GetMapping("/date")
     public List<VoteTo> getAllInDate(@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
+        log.info("Get all votes in {}", date);
         return service.getAllInDate(date);
     }
 
     @GetMapping
     public List<VoteTo> getAll() {
+        log.info("Get all votes");
         return service.getAll();
     }
 }
