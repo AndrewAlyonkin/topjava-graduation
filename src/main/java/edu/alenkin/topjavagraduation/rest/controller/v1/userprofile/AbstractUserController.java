@@ -4,7 +4,6 @@ import edu.alenkin.topjavagraduation.entity.User;
 import edu.alenkin.topjavagraduation.service.UserService;
 import edu.alenkin.topjavagraduation.transferobject.UserTo;
 import edu.alenkin.topjavagraduation.util.UserUtil;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -61,10 +60,10 @@ public abstract class AbstractUserController {
         return service.update(user);
     }
 
-    public User update(UserTo userTo, int id) {
+    public void update(UserTo userTo, int id) {
         assureIdConsistent(userTo, id);
         log.info("Update user {}", id);
-        return service.update(userTo);
+        service.update(userTo);
     }
 
     public void enable(int id, boolean enabled) {

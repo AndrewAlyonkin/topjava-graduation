@@ -1,7 +1,5 @@
 package edu.alenkin.topjavagraduation;
 
-import edu.alenkin.topjavagraduation.entity.Restaurant;
-import edu.alenkin.topjavagraduation.entity.Vote;
 import edu.alenkin.topjavagraduation.transferobject.VoteTo;
 
 import java.time.LocalDateTime;

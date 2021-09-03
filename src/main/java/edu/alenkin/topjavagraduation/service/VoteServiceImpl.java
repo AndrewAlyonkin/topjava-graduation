@@ -1,6 +1,5 @@
 package edu.alenkin.topjavagraduation.service;
 
-import edu.alenkin.topjavagraduation.entity.Restaurant;
 import edu.alenkin.topjavagraduation.entity.Vote;
 import edu.alenkin.topjavagraduation.repository.RestaurantRepository;
 import edu.alenkin.topjavagraduation.repository.UserRepository;
@@ -12,14 +11,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.function.Function;
 
 /**
  * @author Alenkin Andrew
@@ -37,8 +32,8 @@ public class VoteServiceImpl implements VoteService {
     private final UserRepository userRepo;
 
     // H2 database does not supported LocalDateTime.MAX and LocalDateTime.MIN
-    private LocalDateTime maxLocalDateTime = LocalDateTime.of(2500, 1, 1, 23, 59);
-    private LocalDateTime minLocalDateTime = LocalDateTime.of(2020, 1, 1, 0, 0);
+    private final LocalDateTime maxLocalDateTime = LocalDateTime.of(2500, 1, 1, 23, 59);
+    private final LocalDateTime minLocalDateTime = LocalDateTime.of(2020, 1, 1, 0, 0);
 
     @Override
     public Vote create(int userId, int restaurantId) {

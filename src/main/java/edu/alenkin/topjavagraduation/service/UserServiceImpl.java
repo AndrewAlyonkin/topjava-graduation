@@ -4,13 +4,10 @@ import edu.alenkin.topjavagraduation.entity.User;
 import edu.alenkin.topjavagraduation.repository.UserRepository;
 import edu.alenkin.topjavagraduation.security.AuthorizedUser;
 import edu.alenkin.topjavagraduation.transferobject.UserTo;
-import edu.alenkin.topjavagraduation.util.UserUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.context.annotation.Scope;
-import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -19,7 +16,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import java.util.List;
-import java.util.Objects;
 
 import static edu.alenkin.topjavagraduation.util.UserUtil.prepareToSave;
 import static edu.alenkin.topjavagraduation.util.UserUtil.updateFromTo;

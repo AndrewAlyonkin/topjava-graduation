@@ -5,12 +5,9 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.*;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.util.CollectionUtils;
 
 import javax.persistence.Entity;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.*;
 import javax.validation.constraints.Email;

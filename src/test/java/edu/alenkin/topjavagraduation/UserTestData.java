@@ -1,6 +1,5 @@
 package edu.alenkin.topjavagraduation;
 
-import edu.alenkin.topjavagraduation.entity.Dish;
 import edu.alenkin.topjavagraduation.entity.Role;
 import edu.alenkin.topjavagraduation.entity.User;
 
