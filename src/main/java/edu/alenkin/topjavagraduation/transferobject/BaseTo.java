@@ -12,5 +12,4 @@ import lombok.Setter;
 @NoArgsConstructor
 public abstract class BaseTo implements HasId {
     protected Integer id;
-
 }

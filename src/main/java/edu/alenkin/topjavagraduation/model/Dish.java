@@ -15,7 +15,7 @@ import java.time.LocalDate;
  * @author Alenkin Andrew
  * oxqq@ya.ru
  * <p>
- * Represents food on the restaurant menu.
+ * Represents food in the restaurant menu.
  */
 
 @ApiModel(value = "The food on the restaurant menu")

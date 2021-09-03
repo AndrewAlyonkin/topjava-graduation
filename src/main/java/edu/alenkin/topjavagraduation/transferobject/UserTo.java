@@ -39,5 +39,4 @@ public class UserTo extends BaseTo {
         this.email = email;
         this.password = password;
     }
-
 }

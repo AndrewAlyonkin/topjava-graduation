@@ -32,6 +32,7 @@ import static edu.alenkin.topjavagraduation.util.ValidationUtil.checkNotFoundWit
 public class UserServiceImpl implements UserService{
     private final UserRepository repository;
 
+    //field injection caused by cyclic dependencies
     @Autowired
     private PasswordEncoder passwordEncoder;
 

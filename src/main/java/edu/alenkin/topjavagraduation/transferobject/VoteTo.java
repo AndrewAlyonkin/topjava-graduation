@@ -28,26 +28,12 @@ public class VoteTo extends BaseTo{
     @NotNull
     private String userName;
 
-    public VoteTo(LocalDateTime dateTime, Integer restaurantId, String restaurantName, String userName) {
-        this(null, dateTime, restaurantId, restaurantName, userName);
-    }
-
     public VoteTo(Integer id, LocalDateTime dateTime, Integer restaurantId, String restaurantName, String userName) {
         super(id);
         this.dateTime = dateTime;
         this.restaurantId = restaurantId;
         this.restaurantName = restaurantName;
         this.userName = userName;
-    }
-    public VoteTo(Integer id, LocalDateTime dateTime, Integer restaurantId) {
-        super(id);
-        this.dateTime = dateTime;
-        this.restaurantId = restaurantId;
-    }
-    public VoteTo(LocalDateTime dateTime, Integer restaurantId) {
-        super(null);
-        this.dateTime = dateTime;
-        this.restaurantId = restaurantId;
     }
 
     public VoteTo(Vote vote) {

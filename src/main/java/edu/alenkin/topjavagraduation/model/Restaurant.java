@@ -5,12 +5,16 @@ import io.swagger.annotations.ApiModel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import java.util.List;
 
 /**
@@ -26,6 +30,7 @@ import java.util.List;
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Setter
 @Getter
+@ToString
 @NoArgsConstructor
 public class Restaurant extends AbstractNamedEntity implements HasId {
 
@@ -45,14 +50,5 @@ public class Restaurant extends AbstractNamedEntity implements HasId {
     public Restaurant(Integer id, String name, List<Dish> menu) {
         super(id, name);
         this.menu = menu;
-    }
-
-    @Override
-    public String toString() {
-        return "Restaurant{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", menu=" + menu +
-                '}';
     }
 }

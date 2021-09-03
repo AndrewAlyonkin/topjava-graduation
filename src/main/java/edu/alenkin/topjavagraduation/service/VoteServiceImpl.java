@@ -31,7 +31,7 @@ public class VoteServiceImpl implements VoteService {
     private final RestaurantRepository restRepo;
     private final UserRepository userRepo;
 
-    // H2 database does not supported LocalDateTime.MAX and LocalDateTime.MIN
+    // H2 database does not support LocalDateTime.MAX and LocalDateTime.MIN
     private final LocalDateTime maxLocalDateTime = LocalDateTime.of(2500, 1, 1, 23, 59);
     private final LocalDateTime minLocalDateTime = LocalDateTime.of(2020, 1, 1, 0, 0);
 
