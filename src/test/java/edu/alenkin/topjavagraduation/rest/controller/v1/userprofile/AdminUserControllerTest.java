@@ -74,7 +74,7 @@ class AdminUserControllerTest extends AbstractControllerTest {
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andExpect(JsonMatchers.jsonMatcher(List.of(user, admin), User.class, (actual, expected) -> assertThat(actual).hasSameElementsAs(expected)));
+                .andExpect(jsonMatcher(List.of(user, admin), User.class, (actual, expected) -> assertThat(actual).hasSameElementsAs(expected)));
 
     }
 
@@ -85,7 +85,7 @@ class AdminUserControllerTest extends AbstractControllerTest {
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andExpect(JsonMatchers.jsonMatcher(user, User.class, Assertions::assertEquals));
+                .andExpect(jsonMatcher(user, User.class, Assertions::assertEquals));
     }
 
     @Test
