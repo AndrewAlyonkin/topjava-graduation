@@ -1,11 +1,19 @@
 package edu.alenkin.topjavagraduation;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import edu.alenkin.topjavagraduation.entity.Restaurant;
+import edu.alenkin.topjavagraduation.util.JsonUtil;
+import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.ResultMatcher;
 
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
+import java.util.function.BiConsumer;
 
 import static edu.alenkin.topjavagraduation.DishTestData.*;
 import static edu.alenkin.topjavagraduation.entity.AbstractBaseEntity.START_SEQ;
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Alenkin Andrew
@@ -91,4 +99,35 @@ public class RestaurantTestData {
     public static Restaurant getNew() {
         return new Restaurant(null, "New Restaurant");
     }
+
+    public static void assertEquals(Restaurant actual, Restaurant expected) {
+        assertThat(actual).usingRecursiveComparison().ignoringFields("menu.restaurant").isEqualTo(expected);
+    }
+
+    public static void assertNoIdEquals(Restaurant actual, Restaurant expected) {
+        assertThat(actual).usingRecursiveComparison().ignoringFields("id").isEqualTo(expected);
+    }
+
+    public static void assertNoMenuEquals(Restaurant actual, Restaurant expected) {
+        assertThat(actual).usingRecursiveComparison().ignoringFields("menu").isEqualTo(expected);
+    }
+
+    public static Restaurant asRestaurant(MvcResult mvcResult) throws UnsupportedEncodingException, JsonProcessingException {
+        String jsonActual = mvcResult.getResponse().getContentAsString();
+        return JsonUtil.readValue(jsonActual, Restaurant.class);
+    }
+
+    public static List<Restaurant> asRestaurants(MvcResult mvcResult) throws IOException {
+        String jsonActual = mvcResult.getResponse().getContentAsString();
+        return JsonUtil.readValues(jsonActual, Restaurant.class);
+    }
+
+    public static ResultMatcher jsonMatcher(Restaurant expected, BiConsumer<Restaurant, Restaurant> equalsAssertion) {
+        return mvcResult -> equalsAssertion.accept(asRestaurant(mvcResult), expected);
+    }
+
+    public static ResultMatcher jsonMatcher(List<Restaurant> expected, BiConsumer<List<Restaurant>, List<Restaurant>> equalsAssertion) {
+        return mvcResult -> equalsAssertion.accept(asRestaurants(mvcResult), expected);
+    }
+
 }
