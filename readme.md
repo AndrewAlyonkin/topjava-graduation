@@ -7,6 +7,16 @@ Documentation:
 **https://tjgrad.herokuapp.com/swagger-ui.html**
 --------------------------------------------
 
+**Login/password for authorization in API**  
+
+*User email:* user@gmail.com  
+*Password:* user  
+
+*Administrator email:* admin@gmail.com  
+*Password:* admin  
+
+--------------------------------------------
+
 Design and implement a REST API using Hibernate/Spring/SpringMVC (or Spring-Boot) **without frontend**.
 
 The task is:
