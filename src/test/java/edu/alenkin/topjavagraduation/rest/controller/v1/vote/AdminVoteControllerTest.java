@@ -30,19 +30,6 @@ class AdminVoteControllerTest extends AbstractControllerTest {
 
     @Test
     @WithUserDetails(value = ADMIN_MAIL)
-    void getByRestaurantBetween() throws Exception {
-        System.out.println(august18_10am.toLocalDate().toString());
-        perform(MockMvcRequestBuilders.get(URL + "restaurant/" + BISON_ID + "/between")
-                .param("startDate", "2021-08-18")
-                .param("endDate", "2021-08-18"))
-                .andExpect(status().isOk())
-                .andDo(print())
-                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andExpect(JsonMatchers.jsonMatcher(List.of(USER_VOTE_TO1), VoteTo.class, Assertions::assertEquals));
-    }
-
-    @Test
-    @WithUserDetails(value = ADMIN_MAIL)
     void getByRestaurantBetweenNullable() throws Exception {
         perform(MockMvcRequestBuilders.get(URL + "restaurant/" + GOLDEN_ID + "/between"))
                 .andExpect(status().isOk())
@@ -77,16 +64,6 @@ class AdminVoteControllerTest extends AbstractControllerTest {
 
     @Test
     @WithUserDetails(value = ADMIN_MAIL)
-    void getForRestaurant() throws Exception {
-        perform(MockMvcRequestBuilders.get(URL + "/restaurant/" + GOLDEN_ID))
-                .andExpect(status().isOk())
-                .andDo(print())
-                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andExpect(JsonMatchers.jsonMatcher(List.of(USER_VOTE_TO2, ADMIN_VOTE_TO2), VoteTo.class, Assertions::assertEquals));
-    }
-
-    @Test
-    @WithUserDetails(value = ADMIN_MAIL)
     void getAllInDate() throws Exception {
         perform(MockMvcRequestBuilders.get(URL + "/date")
                 .param("date", "2021-08-18"))
@@ -94,20 +71,5 @@ class AdminVoteControllerTest extends AbstractControllerTest {
                 .andDo(print())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
                 .andExpect(JsonMatchers.jsonMatcher(List.of(USER_VOTE_TO1, ADMIN_VOTE_TO1), VoteTo.class, Assertions::assertEquals));
-    }
-
-    @Test
-    @WithUserDetails(value = ADMIN_MAIL)
-    void getAll() throws Exception {
-        perform(MockMvcRequestBuilders.get(URL))
-                .andExpect(status().isOk())
-                .andDo(print())
-                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andExpect(JsonMatchers.jsonMatcher(allVotes, VoteTo.class,
-                        (actual, expected) -> {
-                            actual.sort(Comparator.comparing(VoteTo::getDateTime).reversed());
-                            assertEqualsNoDateTime(actual, expected);
-                        }
-                        ));
     }
 }

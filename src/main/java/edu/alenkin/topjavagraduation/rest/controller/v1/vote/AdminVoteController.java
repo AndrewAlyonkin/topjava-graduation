@@ -21,7 +21,7 @@ import static edu.alenkin.topjavagraduation.rest.controller.v1.vote.AdminVoteCon
  * @author Alenkin Andrew
  * oxqq@ya.ru
  */
-@Api(value = "Admin vote controller", tags = {"Admin operations with votes"})
+@Api(value = "Admin vote controller", tags = {"Getting statistics of votes for the administrator"})
 @RestController
 @RequestMapping(value = REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 @RequiredArgsConstructor
@@ -31,16 +31,6 @@ public class AdminVoteController {
     static final String REST_URL = "/rest/v1/admin/votes";
 
     private final VoteService service;
-
-    @ApiOperation(value = "Get all votes for required restaurant between current start and end dates", response = Iterable.class)
-    @GetMapping("/restaurant/{restId}/between")
-    //https://www.baeldung.com/spring-date-parameters#convert-date-parameters-on-request-level
-    public List<VoteTo> getByRestaurantBetween(@RequestParam @Nullable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
-                                               @RequestParam @Nullable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate,
-                                               @PathVariable int restId) {
-        log.info("Get votes for restaurant {} between {} and {}", restId, startDate, endDate);
-        return service.getByRestaurantBetween(startDate, endDate, restId);
-    }
 
     @ApiOperation(value = "Get all votes for restaurant in current day", response = Iterable.class)
     @GetMapping("/restaurant/{restId}/date")
@@ -52,25 +42,11 @@ public class AdminVoteController {
         return service.getByDateAndRestaurantId(currentDate, restId);
     }
 
-    @ApiOperation(value = "Get all votes for restaurant with required ID", response = Iterable.class)
-    @GetMapping("/restaurant/{restId}")
-    public List<VoteTo> getForRestaurant(@PathVariable int restId) {
-        log.info("Get votes for restaurant with id {}", restId);
-        return service.getByRestaurantId(restId);
-    }
-
     @ApiOperation(value = "Get all votes for all restaurants in current date", response = Iterable.class)
     @GetMapping("/date")
     public List<VoteTo> getAllInDate(@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
         log.info("Get all votes in {}", date);
         return service.getAllInDate(date);
-    }
-
-    @ApiOperation(value = "Get all votes for all restaurants", response = Iterable.class)
-    @GetMapping
-    public List<VoteTo> getAll() {
-        log.info("Get all votes");
-        return service.getAll();
     }
 }
 
