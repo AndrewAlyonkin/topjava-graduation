@@ -30,16 +30,6 @@ class AdminVoteControllerTest extends AbstractControllerTest {
 
     @Test
     @WithUserDetails(value = ADMIN_MAIL)
-    void getByRestaurantBetweenNullable() throws Exception {
-        perform(MockMvcRequestBuilders.get(URL + "restaurant/" + GOLDEN_ID + "/between"))
-                .andExpect(status().isOk())
-                .andDo(print())
-                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andExpect(JsonMatchers.jsonMatcher(List.of(USER_VOTE_TO2, ADMIN_VOTE_TO2), VoteTo.class, Assertions::assertEquals));
-    }
-
-    @Test
-    @WithUserDetails(value = ADMIN_MAIL)
     void getByRestaurantInDate() throws Exception {
         perform(MockMvcRequestBuilders.get(URL + "/restaurant/" + PRESTIGE_ID + "/date")
                 .param("date", "2021-08-18"))
