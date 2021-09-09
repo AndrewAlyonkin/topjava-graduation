@@ -17,7 +17,7 @@ import static edu.alenkin.topjavagraduation.rest.controller.v1.restaurant.UserRe
  * @author Alenkin Andrew
  * oxqq@ya.ru
  */
-@Api(value = "User restaurant controller", tags = {"User CRUD operations with restaurants"})
+@Api(value = "User restaurant controller", tags = {"User operations with restaurants"})
 @RestController
 @RequestMapping(value = REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 public class UserRestaurantController extends AbstractRestaurantController {

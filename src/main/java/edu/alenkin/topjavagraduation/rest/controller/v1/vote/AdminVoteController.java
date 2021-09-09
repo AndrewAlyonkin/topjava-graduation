@@ -21,7 +21,7 @@ import static edu.alenkin.topjavagraduation.rest.controller.v1.vote.AdminVoteCon
  * @author Alenkin Andrew
  * oxqq@ya.ru
  */
-@Api(value = "Admin vote controller", tags = {"Admin CRUD operations with votes"})
+@Api(value = "Admin vote controller", tags = {"Admin operations with votes"})
 @RestController
 @RequestMapping(value = REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 @RequiredArgsConstructor

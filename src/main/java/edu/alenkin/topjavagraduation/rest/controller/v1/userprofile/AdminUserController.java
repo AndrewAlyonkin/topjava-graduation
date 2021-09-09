@@ -19,7 +19,7 @@ import static edu.alenkin.topjavagraduation.rest.controller.v1.userprofile.Admin
  * @author Alenkin Andrew
  * oxqq@ya.ru
  */
-@Api(value = "Admin user controller", tags = {"Admin CRUD operations with users"})
+@Api(value = "Admin user controller", tags = {"Admin operations with users"})
 @RestController
 @RequestMapping(value = REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 public class AdminUserController extends AbstractUserController {

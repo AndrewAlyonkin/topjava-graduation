@@ -19,7 +19,7 @@ import static edu.alenkin.topjavagraduation.rest.controller.v1.restaurant.AdminR
  * @author Alenkin Andrew
  * oxqq@ya.ru
  */
-@Api(value = "Admin restaurant controller", tags = {"Admin CRUD operations with restaurants"})
+@Api(value = "Admin restaurant controller", tags = {"Admin operations with restaurants"})
 @RestController
 @RequestMapping(value = REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 public class AdminRestaurantController extends AbstractRestaurantController {

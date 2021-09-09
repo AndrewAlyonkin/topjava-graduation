@@ -21,7 +21,7 @@ import static edu.alenkin.topjavagraduation.rest.controller.v1.userprofile.UserP
  * @author Alenkin Andrew
  * oxqq@ya.ru
  */
-@Api(value = "User profile controller", tags = {"User base CRUD operations with own profile"})
+@Api(value = "User profile controller", tags = {"User base operations with own profile"})
 @RestController
 @RequestMapping(value = REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 public class UserProfileController extends AbstractUserController {

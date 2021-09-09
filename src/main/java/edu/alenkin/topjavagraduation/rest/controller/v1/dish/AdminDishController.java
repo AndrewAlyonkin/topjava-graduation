@@ -24,7 +24,7 @@ import static edu.alenkin.topjavagraduation.util.ValidationUtil.checkNew;
  * @author Alenkin Andrew
  * oxqq@ya.ru
  */
-@Api(value = "Admin dish controller", tags = {"Admin CRUD operations with dish."})
+@Api(value = "Admin dish controller", tags = {"Admin operations with dish."})
 @RestController
 @RequestMapping(value = REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 @AllArgsConstructor
