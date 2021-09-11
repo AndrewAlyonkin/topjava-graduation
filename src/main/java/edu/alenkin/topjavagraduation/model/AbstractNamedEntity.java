@@ -1,5 +1,7 @@
 package edu.alenkin.topjavagraduation.model;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import edu.alenkin.topjavagraduation.modelview.View;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -24,6 +26,7 @@ public abstract class AbstractNamedEntity extends AbstractBaseEntity {
     @NotBlank
     @Size(min = 2, max = 100)
     @Column(name = "name", nullable = false)
+    @JsonView(View.RestaurantWithoutMenu.class)
     protected String name;
 
     protected AbstractNamedEntity(Integer id, String name) {

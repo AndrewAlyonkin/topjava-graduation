@@ -1,5 +1,7 @@
 package edu.alenkin.topjavagraduation.model;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import edu.alenkin.topjavagraduation.modelview.View;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -29,6 +31,7 @@ public abstract class AbstractBaseEntity implements HasId {
     @Id
     @SequenceGenerator(name = "global_seq", sequenceName = "global_seq", allocationSize = 1, initialValue = START_SEQ)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "global_seq")
+    @JsonView(View.RestaurantWithoutMenu.class)
     protected Integer id;
 
     public int id() {

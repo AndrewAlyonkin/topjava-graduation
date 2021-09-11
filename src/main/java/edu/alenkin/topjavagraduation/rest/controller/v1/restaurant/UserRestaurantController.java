@@ -1,6 +1,8 @@
 package edu.alenkin.topjavagraduation.rest.controller.v1.restaurant;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import edu.alenkin.topjavagraduation.model.Restaurant;
+import edu.alenkin.topjavagraduation.modelview.View;
 import edu.alenkin.topjavagraduation.service.RestaurantService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -35,6 +37,7 @@ public class UserRestaurantController extends AbstractRestaurantController {
     }
 
     @ApiOperation(value = "Get all restaurants from storage", response = Iterable.class)
+    @JsonView(View.RestaurantWithoutMenu.class)
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Restaurant> getAll() {
         return super.getAll();
