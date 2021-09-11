@@ -1,7 +1,7 @@
 package edu.alenkin.topjavagraduation.security;
 
 import edu.alenkin.topjavagraduation.model.User;
-import edu.alenkin.topjavagraduation.transferobject.UserTo;
+import edu.alenkin.topjavagraduation.dto.UserTo;
 import edu.alenkin.topjavagraduation.util.UserUtil;
 
 /**

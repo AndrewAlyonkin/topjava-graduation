@@ -4,7 +4,7 @@ import edu.alenkin.topjavagraduation.model.Vote;
 import edu.alenkin.topjavagraduation.repository.RestaurantRepository;
 import edu.alenkin.topjavagraduation.repository.UserRepository;
 import edu.alenkin.topjavagraduation.repository.VoteRepository;
-import edu.alenkin.topjavagraduation.transferobject.VoteTo;
+import edu.alenkin.topjavagraduation.dto.VoteTo;
 import edu.alenkin.topjavagraduation.util.ValidationUtil;
 import edu.alenkin.topjavagraduation.util.VoteUtil;
 import lombok.RequiredArgsConstructor;

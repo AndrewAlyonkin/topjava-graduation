@@ -2,7 +2,7 @@ package edu.alenkin.topjavagraduation.rest.controller.v1.vote;
 
 import edu.alenkin.topjavagraduation.security.AuthorizedUser;
 import edu.alenkin.topjavagraduation.service.VoteService;
-import edu.alenkin.topjavagraduation.transferobject.VoteTo;
+import edu.alenkin.topjavagraduation.dto.VoteTo;
 import edu.alenkin.topjavagraduation.util.VoteUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

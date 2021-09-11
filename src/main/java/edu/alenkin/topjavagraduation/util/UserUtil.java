@@ -2,7 +2,7 @@ package edu.alenkin.topjavagraduation.util;
 
 import edu.alenkin.topjavagraduation.model.Role;
 import edu.alenkin.topjavagraduation.model.User;
-import edu.alenkin.topjavagraduation.transferobject.UserTo;
+import edu.alenkin.topjavagraduation.dto.UserTo;
 import lombok.experimental.UtilityClass;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.util.StringUtils;

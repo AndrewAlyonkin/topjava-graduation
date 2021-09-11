@@ -2,7 +2,7 @@ package edu.alenkin.topjavagraduation.rest.controller.v1.userprofile;
 
 import edu.alenkin.topjavagraduation.model.User;
 import edu.alenkin.topjavagraduation.service.UserService;
-import edu.alenkin.topjavagraduation.transferobject.UserTo;
+import edu.alenkin.topjavagraduation.dto.UserTo;
 import edu.alenkin.topjavagraduation.util.UserUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

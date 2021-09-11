@@ -2,7 +2,7 @@ package edu.alenkin.topjavagraduation.service;
 
 import edu.alenkin.topjavagraduation.model.Vote;
 import edu.alenkin.topjavagraduation.exception.ExpiredVoteTimeException;
-import edu.alenkin.topjavagraduation.transferobject.VoteTo;
+import edu.alenkin.topjavagraduation.dto.VoteTo;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 

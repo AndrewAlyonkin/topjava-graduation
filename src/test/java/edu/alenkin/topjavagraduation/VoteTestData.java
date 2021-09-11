@@ -1,6 +1,6 @@
 package edu.alenkin.topjavagraduation;
 
-import edu.alenkin.topjavagraduation.transferobject.VoteTo;
+import edu.alenkin.topjavagraduation.dto.VoteTo;
 
 import java.time.LocalDateTime;
 import java.util.List;

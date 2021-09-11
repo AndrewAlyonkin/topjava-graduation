@@ -2,14 +2,13 @@ package edu.alenkin.topjavagraduation.rest.controller.v1.vote;
 
 import edu.alenkin.topjavagraduation.JsonMatchers;
 import edu.alenkin.topjavagraduation.rest.controller.v1.AbstractControllerTest;
-import edu.alenkin.topjavagraduation.transferobject.VoteTo;
+import edu.alenkin.topjavagraduation.dto.VoteTo;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithUserDetails;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import java.util.Comparator;
 import java.util.List;
 
 import static edu.alenkin.topjavagraduation.RestaurantTestData.*;

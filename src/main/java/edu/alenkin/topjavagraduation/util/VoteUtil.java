@@ -1,7 +1,7 @@
 package edu.alenkin.topjavagraduation.util;
 
 import edu.alenkin.topjavagraduation.model.Vote;
-import edu.alenkin.topjavagraduation.transferobject.VoteTo;
+import edu.alenkin.topjavagraduation.dto.VoteTo;
 import lombok.experimental.UtilityClass;
 
 import java.util.List;

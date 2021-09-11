@@ -2,7 +2,7 @@ package edu.alenkin.topjavagraduation.rest.controller.v1.userprofile;
 
 import edu.alenkin.topjavagraduation.model.User;
 import edu.alenkin.topjavagraduation.security.AuthorizedUser;
-import edu.alenkin.topjavagraduation.transferobject.UserTo;
+import edu.alenkin.topjavagraduation.dto.UserTo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.http.HttpStatus;

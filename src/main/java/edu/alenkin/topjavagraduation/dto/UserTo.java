@@ -1,4 +1,4 @@
-package edu.alenkin.topjavagraduation.transferobject;
+package edu.alenkin.topjavagraduation.dto;
 
 import lombok.*;
 

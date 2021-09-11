@@ -1,9 +1,8 @@
-package edu.alenkin.topjavagraduation.transferobject;
+package edu.alenkin.topjavagraduation.dto;
 
 import edu.alenkin.topjavagraduation.model.Vote;
 import lombok.*;
 
-import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 /**
