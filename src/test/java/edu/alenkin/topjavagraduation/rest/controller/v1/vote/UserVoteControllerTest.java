@@ -56,7 +56,7 @@ class UserVoteControllerTest extends AbstractControllerTest {
 
         perform(MockMvcRequestBuilders.post(URL + BISON_ID)
                 .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isConflict());
+                .andExpect(status().isUnprocessableEntity());
 
         service.setVoteTimeExpiration(expiration);
     }
@@ -83,7 +83,7 @@ class UserVoteControllerTest extends AbstractControllerTest {
 
         perform(MockMvcRequestBuilders.put(URL + BISON_ID)
                 .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isConflict());
+                .andExpect(status().isUnprocessableEntity());
 
         service.setVoteTimeExpiration(expiration);
     }
