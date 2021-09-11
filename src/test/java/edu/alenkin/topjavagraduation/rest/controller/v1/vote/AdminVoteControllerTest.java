@@ -31,7 +31,8 @@ class AdminVoteControllerTest extends AbstractControllerTest {
     @Test
     @WithUserDetails(value = ADMIN_MAIL)
     void getByRestaurantInDate() throws Exception {
-        perform(MockMvcRequestBuilders.get(URL + "/restaurant/" + PRESTIGE_ID + "/date")
+        perform(MockMvcRequestBuilders.get(URL + "/restaurant")
+                .param("restId", String.valueOf(PRESTIGE_ID))
                 .param("date", "2021-08-18"))
                 .andExpect(status().isOk())
                 .andDo(print())
@@ -41,14 +42,14 @@ class AdminVoteControllerTest extends AbstractControllerTest {
 
     @Test
     void getByRestaurantUnauthorized() throws Exception {
-        perform(MockMvcRequestBuilders.get(URL + "/restaurant/" + PRESTIGE_ID + "/date"))
+        perform(MockMvcRequestBuilders.get(URL + "/restaurant"))
                 .andExpect(status().isUnauthorized());
     }
 
     @Test
     @WithUserDetails(value = USER_MAIL)
     void getByRestaurantWithUser() throws Exception {
-        perform(MockMvcRequestBuilders.get(URL + "/restaurant/" + PRESTIGE_ID + "/date"))
+        perform(MockMvcRequestBuilders.get(URL + "/restaurant"))
                 .andExpect(status().isForbidden());
     }
 

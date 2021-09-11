@@ -38,8 +38,8 @@ public class UserVoteController {
     private final VoteService service;
 
     @ApiOperation(value = "Take a vote for some restaurant with required ID", response = VoteTo.class)
-    @PostMapping(value = "/{restId}")
-    public ResponseEntity<VoteTo> create(@PathVariable int restId,
+    @PostMapping
+    public ResponseEntity<VoteTo> create(@RequestParam int restId,
                                          @AuthenticationPrincipal @ApiIgnore AuthorizedUser authorizedUser) {
         int authUserId = authorizedUser.getId();
         log.info("User {} votes for {}", authUserId, restId);
@@ -54,9 +54,9 @@ public class UserVoteController {
     }
 
     @ApiOperation(value = "Change your vote. You cant change vote after vote expiration time", response = VoteTo.class)
-    @PutMapping(value = "/{restId}")
+    @PutMapping
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
-    public VoteTo update(@PathVariable int restId,
+    public VoteTo update(@RequestParam int restId,
                          @AuthenticationPrincipal @ApiIgnore AuthorizedUser authorizedUser) {
         int authUserId = authorizedUser.getId();
         log.info("User {} updates vote and votes for {}", authUserId, restId);

@@ -32,9 +32,9 @@ public class AdminVoteController {
     private final VoteService service;
 
     @ApiOperation(value = "Get all votes for restaurant in current day", response = Iterable.class)
-    @GetMapping("/restaurant/{restId}/date")
+    @GetMapping("/restaurant")
     public List<VoteTo> getByRestaurantInDate(@RequestParam @Nullable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date,
-                                              @PathVariable int restId) {
+                                              @RequestParam int restId) {
         LocalDate currentDate = (date == null) ? LocalDate.now() : date;
 
         log.info("Get votes for restaurant {} in {}", restId, currentDate);

@@ -40,7 +40,7 @@ class UserVoteControllerTest extends AbstractControllerTest {
         LocalTime expiration = service.getVoteTimeExpiration();
         service.setVoteTimeExpiration(LocalTime.MAX);
 
-        perform(MockMvcRequestBuilders.post(URL + BISON_ID)
+        perform(MockMvcRequestBuilders.post(URL).param("restId",String.valueOf(BISON_ID))
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isCreated())
                 .andExpect(jsonMatcher(getNewVoteTo(), VoteTo.class, VoteTestData::assertEqualsNoIdAndDateTime));
@@ -54,7 +54,7 @@ class UserVoteControllerTest extends AbstractControllerTest {
         LocalTime expiration = service.getVoteTimeExpiration();
         service.setVoteTimeExpiration(LocalTime.MIN);
 
-        perform(MockMvcRequestBuilders.post(URL + BISON_ID)
+        perform(MockMvcRequestBuilders.post(URL).param("restId",String.valueOf(BISON_ID))
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isUnprocessableEntity());
 
@@ -67,7 +67,7 @@ class UserVoteControllerTest extends AbstractControllerTest {
         LocalTime expiration = service.getVoteTimeExpiration();
         service.setVoteTimeExpiration(LocalTime.MAX);
 
-        perform(MockMvcRequestBuilders.put(URL + BISON_ID)
+        perform(MockMvcRequestBuilders.put(URL).param("restId",String.valueOf(BISON_ID))
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNoContent())
                 .andExpect(jsonMatcher(getUpdated(), VoteTo.class, VoteTestData::assertEqualsNoIdAndDateTime));
@@ -81,7 +81,7 @@ class UserVoteControllerTest extends AbstractControllerTest {
         LocalTime expiration = service.getVoteTimeExpiration();
         service.setVoteTimeExpiration(LocalTime.MIN);
 
-        perform(MockMvcRequestBuilders.put(URL + BISON_ID)
+        perform(MockMvcRequestBuilders.put(URL).param("restId",String.valueOf(BISON_ID))
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isUnprocessableEntity());
 
