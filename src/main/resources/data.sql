@@ -39,7 +39,7 @@ VALUES ('Current date soup Bison', '500', 100002),
        ('Current date dessert Prestige', '600', 100003),
        ('Current date dessert Golden', '700', 100004);
 
-INSERT INTO dish (name, price, restaurant_id, date)
+INSERT INTO dish (name, price, restaurant_id, dish_date)
 VALUES ('Soup Bison', '100', 100002, '2021-08-18'),
        ('Soup Prestige', '200', 100003, '2021-08-18'),
        ('Soup Golden', '300', 100004, '2021-08-19'),

@@ -42,11 +42,11 @@ CREATE TABLE dish
     restaurant_id INTEGER               NOT NULL,
     name          VARCHAR(255)          NOT NULL,
     price         INTEGER               NOT NULL,
-    date          DATE    DEFAULT now() NOT NULL,
+    dish_date          DATE    DEFAULT now() NOT NULL,
     FOREIGN KEY (restaurant_id) REFERENCES restaurant (id) ON DELETE CASCADE
 );
 ALTER TABLE dish
-    ADD CONSTRAINT dish_unique_restaurant_name_date_idx UNIQUE (restaurant_id, name, date);
+    ADD CONSTRAINT dish_unique_restaurant_name_date_idx UNIQUE (restaurant_id, name, dish_date);
 
 
 CREATE TABLE vote
