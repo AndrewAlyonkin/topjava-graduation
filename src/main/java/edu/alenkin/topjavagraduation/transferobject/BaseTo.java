@@ -1,15 +1,13 @@
 package edu.alenkin.topjavagraduation.transferobject;
 
 import edu.alenkin.topjavagraduation.model.HasId;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode
 public abstract class BaseTo implements HasId {
     protected Integer id;
 }

@@ -13,19 +13,16 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @NoArgsConstructor
-@EqualsAndHashCode
+@EqualsAndHashCode(callSuper = true)
 @ToString
 public class VoteTo extends BaseTo{
 
     private LocalDateTime dateTime;
 
-    @NotNull
     private Integer restaurantId;
 
-    @NotNull
     private String restaurantName;
 
-    @NotNull
     private String userName;
 
     public VoteTo(Integer id, LocalDateTime dateTime, Integer restaurantId, String restaurantName, String userName) {
