@@ -22,7 +22,6 @@ import java.time.LocalDate;
 @Table(name = "dish")
 @Setter
 @Getter
-@AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @ToString(includeFieldNames = false, exclude = "restaurant")
 public class Dish extends AbstractNamedEntity {

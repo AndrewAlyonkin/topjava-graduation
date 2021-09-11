@@ -30,7 +30,6 @@ import java.util.Set;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 @ToString(includeFieldNames = false, exclude = "password")
 public class User extends AbstractNamedEntity {
 
