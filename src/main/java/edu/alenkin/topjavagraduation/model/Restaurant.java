@@ -24,16 +24,15 @@ import java.util.List;
  * The restaurant contains a menu that is filled in by the administrator and is updated every day.
  */
 
-@ApiModel(value = "The restaurant contains a menu that is filled in by the administrator and is updated every day")
 @Entity
 @Table(name = "restaurant")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Setter
 @Getter
-@ToString
 @NoArgsConstructor
 public class Restaurant extends AbstractNamedEntity implements HasId {
 
+    @ToString.Exclude
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "restaurant")
     @Fetch(value = FetchMode.SUBSELECT)
     @JsonManagedReference(value = "menu")

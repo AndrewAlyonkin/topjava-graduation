@@ -24,7 +24,6 @@ import javax.validation.constraints.Size;
 @AllArgsConstructor
 public abstract class AbstractNamedEntity extends AbstractBaseEntity {
 
-    @ApiModelProperty(example = "entity_name")
     @NotBlank
     @Size(min = 2, max = 100)
     @Column(name = "name", nullable = false)

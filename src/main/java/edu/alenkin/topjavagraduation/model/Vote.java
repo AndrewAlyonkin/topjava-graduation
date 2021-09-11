@@ -22,7 +22,6 @@ import java.time.LocalDateTime;
  * Only one vote counted per user.
  */
 
-@ApiModel(value = "The vote given for a specific restaurant")
 @Entity
 @Table(name = "vote")
 @Getter
@@ -41,7 +40,6 @@ public class Vote extends AbstractBaseEntity {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Restaurant restaurant;
 
-    @ApiModelProperty(example = "2021-09-03T19:20:32.298678700")
     @Column(name = "datetime")
     @NotNull
     private LocalDateTime voteDateTime;

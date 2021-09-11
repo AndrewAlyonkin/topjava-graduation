@@ -24,7 +24,6 @@ import java.util.Set;
  * oxqq@ya.ru
  */
 
-@ApiModel(value = "The user of application")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Entity
 @Table(name = "users")
@@ -35,20 +34,17 @@ import java.util.Set;
 @ToString(includeFieldNames = false, exclude = "password")
 public class User extends AbstractNamedEntity {
 
-    @ApiModelProperty(example = "user@rambler.ru")
     @Column(name = "email", nullable = false, unique = true)
     @Email
     @NotBlank
     @Size(max = 100)
     private String email;
 
-    @ApiModelProperty(example = "password")
     @Column(name = "password", nullable = false)
     @NotBlank
     @Size(min = 5, max = 100)
     private String password;
 
-    @ApiModelProperty(example = "true")
     @Column(name = "enabled", nullable = false, columnDefinition = "bool default true")
     private boolean enabled = true;
 
