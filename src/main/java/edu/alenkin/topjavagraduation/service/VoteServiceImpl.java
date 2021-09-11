@@ -10,6 +10,7 @@ import edu.alenkin.topjavagraduation.util.VoteUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -36,6 +37,7 @@ public class VoteServiceImpl implements VoteService {
     private final LocalDateTime minLocalDateTime = LocalDateTime.of(2020, 1, 1, 0, 0);
 
     @Override
+    @Transactional
     public Vote create(int userId, int restaurantId) {
         LocalDateTime now = LocalDateTime.now();
         List<Vote> votes = voteRepo.getAllForUserBetween(userId, now.with(LocalTime.MIN), now.with(LocalTime.MAX));
