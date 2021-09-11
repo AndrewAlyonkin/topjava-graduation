@@ -47,7 +47,7 @@ public class UserVoteController {
         VoteTo created = VoteUtil.asTo(service.create(authUserId, restId));
         URI uriOfNewResource = ServletUriComponentsBuilder
                 .fromCurrentContextPath()
-                .path(REST_URL + "/{id}")
+                .path(REST_URL)
                 .buildAndExpand(created.getId())
                 .toUri();
         return ResponseEntity.created(uriOfNewResource).body(created);
