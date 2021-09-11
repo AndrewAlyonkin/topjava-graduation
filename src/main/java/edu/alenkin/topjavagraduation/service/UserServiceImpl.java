@@ -1,9 +1,9 @@
 package edu.alenkin.topjavagraduation.service;
 
+import edu.alenkin.topjavagraduation.dto.UserTo;
 import edu.alenkin.topjavagraduation.model.User;
 import edu.alenkin.topjavagraduation.repository.UserRepository;
 import edu.alenkin.topjavagraduation.security.AuthorizedUser;
-import edu.alenkin.topjavagraduation.dto.UserTo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
@@ -29,7 +29,7 @@ import static edu.alenkin.topjavagraduation.util.ValidationUtil.checkNotFoundWit
 @Service
 @Transactional
 @RequiredArgsConstructor
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
     private final UserRepository repository;
 
     //field injection caused by cyclic dependencies

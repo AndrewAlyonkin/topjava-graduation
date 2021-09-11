@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 @ToString
-public class VoteTo extends BaseTo{
+public class VoteTo extends BaseTo {
 
     private LocalDateTime dateTime;
 

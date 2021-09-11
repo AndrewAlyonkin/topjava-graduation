@@ -41,13 +41,13 @@ public class UserRestaurantController extends AbstractRestaurantController {
     }
 
     @ApiOperation(value = "Get all restaurants with its menu for today", response = Iterable.class)
-    @GetMapping(value = "/today",produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/today", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Restaurant> getAllWithMenuForToday() {
         return super.getAllWithDishes(LocalDate.now());
     }
 
     @ApiOperation(value = "Get all restaurants with its menu for current date", response = Iterable.class)
-    @GetMapping(value = "/date",produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/date", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Restaurant> getAllWithMenuForDate(@RequestParam @Nullable LocalDate date) {
         return super.getAllWithDishes(date == null ? LocalDate.now() : date);
     }

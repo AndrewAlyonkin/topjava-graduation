@@ -29,6 +29,7 @@ public class JsonUtil {
         ObjectReader reader = objectMapper.readerFor(clazz);
         return reader.<T>readValues(json).readAll();
     }
+
     public static <T> T readValue(String json, Class<T> clazz) throws JsonProcessingException {
         return objectMapper.readValue(json, clazz);
     }

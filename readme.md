@@ -7,13 +7,13 @@ Documentation:
 **https://tjgrad.herokuapp.com/swagger-ui.html**
 --------------------------------------------
 
-**Login/password for authorization in API**  
+**Login/password for authorization in API**
 
 *User email:* user@gmail.com  
-*Password:* user  
+*Password:* user
 
 *Administrator email:* admin@gmail.com  
-*Password:* admin  
+*Password:* admin
 
 --------------------------------------------
 
@@ -34,7 +34,8 @@ Build a voting system for deciding where to have lunch.
 
 Each restaurant provides a new menu each day.
 
-As a result, provide a link to github repository. It should contain the code, README.md with API documentation and couple curl commands to test it (better - Swagger).
+As a result, provide a link to github repository. It should contain the code, README.md with API documentation and
+couple curl commands to test it (better - Swagger).
 
 -----------------------------
 P.S.: Make sure everything works with latest version that is on github :)

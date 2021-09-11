@@ -1,8 +1,8 @@
 package edu.alenkin.topjavagraduation.util;
 
+import edu.alenkin.topjavagraduation.dto.UserTo;
 import edu.alenkin.topjavagraduation.model.Role;
 import edu.alenkin.topjavagraduation.model.User;
-import edu.alenkin.topjavagraduation.dto.UserTo;
 import lombok.experimental.UtilityClass;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.util.StringUtils;
@@ -30,7 +30,7 @@ public class UserUtil {
 
     public static User prepareToSave(User user, PasswordEncoder passwordEncoder) {
         String password = user.getPassword();
-        user.setPassword(StringUtils.hasLength(password) ? passwordEncoder.encode(password): password);
+        user.setPassword(StringUtils.hasLength(password) ? passwordEncoder.encode(password) : password);
         user.setEmail(user.getEmail().toLowerCase());
         return user;
     }

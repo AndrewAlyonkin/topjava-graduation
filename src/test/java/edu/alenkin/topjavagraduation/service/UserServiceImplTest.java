@@ -1,8 +1,8 @@
 package edu.alenkin.topjavagraduation.service;
 
+import edu.alenkin.topjavagraduation.exception.NotFoundException;
 import edu.alenkin.topjavagraduation.model.Role;
 import edu.alenkin.topjavagraduation.model.User;
-import edu.alenkin.topjavagraduation.exception.NotFoundException;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;

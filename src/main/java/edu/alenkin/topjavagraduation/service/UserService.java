@@ -1,7 +1,7 @@
 package edu.alenkin.topjavagraduation.service;
 
-import edu.alenkin.topjavagraduation.model.User;
 import edu.alenkin.topjavagraduation.dto.UserTo;
+import edu.alenkin.topjavagraduation.model.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

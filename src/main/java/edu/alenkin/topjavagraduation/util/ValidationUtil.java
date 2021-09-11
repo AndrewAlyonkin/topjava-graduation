@@ -1,9 +1,9 @@
 package edu.alenkin.topjavagraduation.util;
 
-import edu.alenkin.topjavagraduation.model.HasId;
 import edu.alenkin.topjavagraduation.exception.ExpiredVoteTimeException;
 import edu.alenkin.topjavagraduation.exception.IllegalRequestDataException;
 import edu.alenkin.topjavagraduation.exception.NotFoundException;
+import edu.alenkin.topjavagraduation.model.HasId;
 import lombok.experimental.UtilityClass;
 
 import java.time.LocalTime;

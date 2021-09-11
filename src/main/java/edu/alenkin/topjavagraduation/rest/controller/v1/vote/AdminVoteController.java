@@ -1,7 +1,7 @@
 package edu.alenkin.topjavagraduation.rest.controller.v1.vote;
 
-import edu.alenkin.topjavagraduation.service.VoteService;
 import edu.alenkin.topjavagraduation.dto.VoteTo;
+import edu.alenkin.topjavagraduation.service.VoteService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;

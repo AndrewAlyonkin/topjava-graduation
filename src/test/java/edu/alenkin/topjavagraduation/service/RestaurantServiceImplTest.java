@@ -1,7 +1,7 @@
 package edu.alenkin.topjavagraduation.service;
 
-import edu.alenkin.topjavagraduation.model.Restaurant;
 import edu.alenkin.topjavagraduation.exception.NotFoundException;
+import edu.alenkin.topjavagraduation.model.Restaurant;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

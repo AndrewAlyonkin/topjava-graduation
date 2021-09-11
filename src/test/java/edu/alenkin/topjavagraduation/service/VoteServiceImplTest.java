@@ -1,16 +1,18 @@
 package edu.alenkin.topjavagraduation.service;
 
-import edu.alenkin.topjavagraduation.model.Vote;
-import edu.alenkin.topjavagraduation.exception.ExpiredVoteTimeException;
 import edu.alenkin.topjavagraduation.dto.VoteTo;
+import edu.alenkin.topjavagraduation.exception.ExpiredVoteTimeException;
+import edu.alenkin.topjavagraduation.model.Vote;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.time.*;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Comparator;
 import java.util.List;
 
-import static edu.alenkin.topjavagraduation.RestaurantTestData.*;
+import static edu.alenkin.topjavagraduation.RestaurantTestData.GOLDEN;
+import static edu.alenkin.topjavagraduation.RestaurantTestData.GOLDEN_ID;
 import static edu.alenkin.topjavagraduation.UserTestData.USER_ID;
 import static edu.alenkin.topjavagraduation.UserTestData.user;
 import static edu.alenkin.topjavagraduation.VoteTestData.*;

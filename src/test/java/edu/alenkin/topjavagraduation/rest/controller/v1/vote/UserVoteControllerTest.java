@@ -2,9 +2,9 @@ package edu.alenkin.topjavagraduation.rest.controller.v1.vote;
 
 import edu.alenkin.topjavagraduation.JsonMatchers;
 import edu.alenkin.topjavagraduation.VoteTestData;
+import edu.alenkin.topjavagraduation.dto.VoteTo;
 import edu.alenkin.topjavagraduation.rest.controller.v1.AbstractControllerTest;
 import edu.alenkin.topjavagraduation.service.VoteService;
-import edu.alenkin.topjavagraduation.dto.VoteTo;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;

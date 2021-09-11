@@ -12,8 +12,8 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithUserDetails;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import static edu.alenkin.topjavagraduation.RestaurantTestData.GOLDEN_ID;
 import static edu.alenkin.topjavagraduation.JsonMatchers.jsonMatcher;
+import static edu.alenkin.topjavagraduation.RestaurantTestData.GOLDEN_ID;
 import static edu.alenkin.topjavagraduation.UserTestData.ADMIN_MAIL;
 import static edu.alenkin.topjavagraduation.UserTestData.USER_MAIL;
 import static edu.alenkin.topjavagraduation.util.JsonUtil.writeValue;

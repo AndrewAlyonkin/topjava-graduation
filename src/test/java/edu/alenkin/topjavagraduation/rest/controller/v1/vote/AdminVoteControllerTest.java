@@ -1,8 +1,8 @@
 package edu.alenkin.topjavagraduation.rest.controller.v1.vote;
 
 import edu.alenkin.topjavagraduation.JsonMatchers;
-import edu.alenkin.topjavagraduation.rest.controller.v1.AbstractControllerTest;
 import edu.alenkin.topjavagraduation.dto.VoteTo;
+import edu.alenkin.topjavagraduation.rest.controller.v1.AbstractControllerTest;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
@@ -11,10 +11,11 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import java.util.List;
 
-import static edu.alenkin.topjavagraduation.RestaurantTestData.*;
+import static edu.alenkin.topjavagraduation.RestaurantTestData.PRESTIGE_ID;
 import static edu.alenkin.topjavagraduation.UserTestData.ADMIN_MAIL;
 import static edu.alenkin.topjavagraduation.UserTestData.USER_MAIL;
-import static edu.alenkin.topjavagraduation.VoteTestData.*;
+import static edu.alenkin.topjavagraduation.VoteTestData.ADMIN_VOTE_TO1;
+import static edu.alenkin.topjavagraduation.VoteTestData.USER_VOTE_TO1;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;

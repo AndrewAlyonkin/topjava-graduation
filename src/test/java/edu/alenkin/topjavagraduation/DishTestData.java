@@ -55,7 +55,7 @@ public class DishTestData {
     }
 
     public static Dish getNew() {
-        return new Dish( "New Dish", 999, LocalDate.now(), null);
+        return new Dish("New Dish", 999, LocalDate.now(), null);
     }
 
     public static Dish getUpdated() {
