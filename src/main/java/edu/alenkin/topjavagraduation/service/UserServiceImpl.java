@@ -36,7 +36,7 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    @CacheEvict(value = "users", allEntries = true)
+    @CacheEvict(value = "user_cache", allEntries = true)
     public User create(User user) {
         Assert.notNull(user, "user must not be null");
         return prepareAndSave(user);
@@ -46,41 +46,42 @@ public class UserServiceImpl implements UserService {
         return repository.save(prepareToSave(user, passwordEncoder));
     }
 
+    @Cacheable("user_cache")
     public User get(int id) {
         return checkNotFoundWithId(repository.findById(id).orElse(null), id);
     }
 
+    @Cacheable("user_cache")
     public User getByEmail(String email) {
         Assert.notNull(email, "email must not be null");
         return checkNotFound(repository.getByEmail(email), "email=" + email);
     }
 
-    @Cacheable("users")
     public List<User> getAll() {
         return repository.findAll();
     }
 
-    @CacheEvict(value = "users", allEntries = true)
+    @CacheEvict(value = "user_cache", allEntries = true)
     public User update(User user) {
         Assert.notNull(user, "user must not be null");
         checkNotFoundWithId(repository.save(prepareToSave(user, passwordEncoder)), user.getId());
         return repository.findById(user.getId()).get();
     }
 
-    @CacheEvict(value = "users", allEntries = true)
+    @CacheEvict(value = "user_cache", allEntries = true)
     public User update(UserTo userTo) {
         User user = updateFromTo(get(userTo.getId()), userTo);
         repository.save(prepareToSave(user, passwordEncoder));
         return repository.findById(user.getId()).get();
     }
 
-    @CacheEvict(value = "users", allEntries = true)
+    @CacheEvict(value = "user_cache", allEntries = true)
     public void delete(int id) {
         checkNotFoundWithId(repository.delete(id) != 0, id);
     }
 
 
-    @CacheEvict(value = "users", allEntries = true)
+    @CacheEvict(value = "user_cache", allEntries = true)
     public void enable(int id, boolean enabled) {
         User user = get(id);
         user.setEnabled(enabled);
