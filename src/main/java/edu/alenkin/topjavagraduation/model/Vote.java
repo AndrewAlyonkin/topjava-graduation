@@ -30,7 +30,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class Vote extends AbstractBaseEntity {
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private User user;
