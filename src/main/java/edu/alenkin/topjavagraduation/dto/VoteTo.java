@@ -3,7 +3,7 @@ package edu.alenkin.topjavagraduation.dto;
 import edu.alenkin.topjavagraduation.model.Vote;
 import lombok.*;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 /**
  * @author Alenkin Andrew
@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 @ToString
 public class VoteTo extends BaseTo {
 
-    private LocalDateTime dateTime;
+    private LocalDate voteDate;
 
     private Integer restaurantId;
 
@@ -24,9 +24,9 @@ public class VoteTo extends BaseTo {
 
     private String userName;
 
-    public VoteTo(Integer id, LocalDateTime dateTime, Integer restaurantId, String restaurantName, String userName) {
+    public VoteTo(Integer id, LocalDate voteDate, Integer restaurantId, String restaurantName, String userName) {
         super(id);
-        this.dateTime = dateTime;
+        this.voteDate = voteDate;
         this.restaurantId = restaurantId;
         this.restaurantName = restaurantName;
         this.userName = userName;
@@ -34,7 +34,7 @@ public class VoteTo extends BaseTo {
 
     public VoteTo(Vote vote) {
         super(vote.getId());
-        this.dateTime = (vote.getVoteDateTime());
+        this.voteDate = (vote.getVoteDate());
         this.restaurantId = vote.getRestaurant().getId();
         this.restaurantName = vote.getRestaurant().getName();
         this.userName = vote.getUser().getName();

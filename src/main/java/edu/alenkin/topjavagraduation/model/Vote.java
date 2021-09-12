@@ -9,6 +9,7 @@ import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 /**
@@ -38,18 +39,18 @@ public class Vote extends AbstractBaseEntity {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Restaurant restaurant;
 
-    @Column(name = "datetime")
+    @Column(name = "vote_date")
     @NotNull
-    private LocalDateTime voteDateTime;
+    private LocalDate voteDate;
 
-    public Vote(Integer id, User user, Restaurant restaurant, LocalDateTime voteDateTime) {
+    public Vote(Integer id, User user, Restaurant restaurant, LocalDate voteDate) {
         super(id);
         this.user = user;
         this.restaurant = restaurant;
-        this.voteDateTime = voteDateTime;
+        this.voteDate = voteDate;
     }
 
-    public Vote(User user, Restaurant restaurant, LocalDateTime voteDateTime) {
-        this(null, user, restaurant, voteDateTime);
+    public Vote(User user, Restaurant restaurant, LocalDate voteDate) {
+        this(null, user, restaurant, voteDate);
     }
 }

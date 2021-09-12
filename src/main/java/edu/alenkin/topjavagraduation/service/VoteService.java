@@ -15,19 +15,11 @@ public interface VoteService {
 
     Vote create(int userId, int restaurantId);
 
-    List<VoteTo> getByUserIdAndDate(int userId, LocalDate date);
-
-    List<VoteTo> getAllByUserId(int userId);
-
-    List<VoteTo> getByRestaurantBetween(LocalDate startDate, LocalDate endDate, int restaurantId);
+    VoteTo getByUserAndDate(int userId, LocalDate date);
 
     List<VoteTo> getByDateAndRestaurantId(LocalDate date, int restaurantId);
 
-    List<VoteTo> getByRestaurantId(int restaurantId);
-
     List<VoteTo> getAllInDate(LocalDate date);
-
-    List<VoteTo> getAll();
 
     void setVoteTimeExpiration(LocalTime VOTE_TIME_EXPIRATION);
 

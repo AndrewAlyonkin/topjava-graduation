@@ -63,15 +63,15 @@ public class UserVoteController {
         return VoteUtil.asTo(service.create(authUserId, restId));
     }
 
-    @ApiOperation(value = "Get all own votes in current date", response = Iterable.class)
+    @ApiOperation(value = "Get own vote in current date(or now, if parameter date is empty)", response = Iterable.class)
     @GetMapping
     @ResponseStatus(value = HttpStatus.OK)
-    public List<VoteTo> getOwnVotes(@AuthenticationPrincipal @ApiIgnore AuthorizedUser authorizedUser,
+    public VoteTo getOwnVoteInDate(@AuthenticationPrincipal @ApiIgnore AuthorizedUser authorizedUser,
                                     @RequestParam(required = false) LocalDate date) {
         int authUserId = authorizedUser.getId();
         log.info("Get all votes for user {} in {}", authUserId, date);
-        if (date == null) {
-            return service.getAllByUserId(authUserId);
-        } else return service.getByUserIdAndDate(authUserId, date);
+        return (date == null)
+                ? service.getByUserAndDate(authUserId, LocalDate.now())
+                : service.getByUserAndDate(authUserId, date);
     }
 }

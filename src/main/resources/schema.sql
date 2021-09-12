@@ -54,10 +54,10 @@ CREATE TABLE vote
     id            INTEGER   DEFAULT GLOBAL_SEQ.nextval PRIMARY KEY,
     user_id       INTEGER                 NOT NULL,
     restaurant_id INTEGER                 NOT NULL,
-    datetime      TIMESTAMP DEFAULT now() NOT NULL,
+    vote_date      DATE DEFAULT now() NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE,
     FOREIGN KEY (restaurant_id) REFERENCES restaurant (id) ON DELETE CASCADE
 );
 ALTER TABLE vote
-    ADD CONSTRAINT vote_unique_user_date_idx UNIQUE (user_id, datetime);
+    ADD CONSTRAINT vote_unique_user_date_idx UNIQUE (user_id, vote_date);
 

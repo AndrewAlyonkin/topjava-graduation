@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
 
@@ -32,74 +31,35 @@ public class VoteServiceImpl implements VoteService {
     private final RestaurantRepository restRepo;
     private final UserRepository userRepo;
 
-    // H2 database does not support LocalDateTime.MAX and LocalDateTime.MIN
-    private final LocalDateTime maxLocalDateTime = LocalDateTime.of(2500, 1, 1, 23, 59);
-    private final LocalDateTime minLocalDateTime = LocalDateTime.of(2020, 1, 1, 0, 0);
-
     @Override
     @Transactional
     public Vote create(int userId, int restaurantId) {
-        LocalDateTime now = LocalDateTime.now();
-        List<Vote> votes = voteRepo.getAllForUserBetween(userId, now.with(LocalTime.MIN), now.with(LocalTime.MAX));
-        Vote vote = votes.isEmpty()
+        LocalDate now = LocalDate.now();
+        Vote vote = voteRepo.getForUserInDate(userId, now);
+        Vote newVote = (vote == null)
                 ? new Vote(userRepo.getById(userId), restRepo.getById(restaurantId), now)
-                : updateExisted(votes.get(0), restaurantId, now);
-        return voteRepo.save(vote);
+                : updateExisted(vote, restaurantId);
+        return voteRepo.save(newVote);
     }
 
     @Override
-    public List<VoteTo> getByUserIdAndDate(int userId, LocalDate date) {
-        LocalDateTime currentDate = date.atStartOfDay();
-        return VoteUtil.asTo(voteRepo.getAllForUserBetween(userId,
-                currentDate.with(LocalTime.MIN), currentDate.with(LocalTime.MAX)));
-    }
-
-    @Override
-    public List<VoteTo> getByRestaurantBetween(LocalDate startDate, LocalDate endDate, int restaurantId) {
-
-        // H2 database does not supported LocalDateTime.MAX and LocalDateTime.MIN
-        LocalDateTime startDateTime = (startDate == null)
-                ? minLocalDateTime
-                : startDate.atTime(LocalTime.MIN);
-
-        LocalDateTime endDateTime = (endDate == null)
-                ? maxLocalDateTime
-                : endDate.atTime(LocalTime.MAX);
-
-        return VoteUtil.asTo(voteRepo.getAllForRestaurantInBetween(startDateTime, endDateTime, restaurantId));
-    }
-
-    @Override
-    public List<VoteTo> getAllByUserId(int userId) {
-        return VoteUtil.asTo(voteRepo.getAllForUser(userId));
+    public VoteTo getByUserAndDate(int userId, LocalDate date) {
+        return VoteUtil.asTo(voteRepo.getForUserInDate(userId, date));
     }
 
     @Override
     public List<VoteTo> getByDateAndRestaurantId(LocalDate date, int restaurantId) {
-        return VoteUtil.asTo(voteRepo.getAllForRestaurantInBetween(date.atStartOfDay(),
-                date.atStartOfDay().with(LocalTime.MAX), restaurantId));
-    }
-
-    @Override
-    public List<VoteTo> getByRestaurantId(int restaurantId) {
-        return VoteUtil.asTo(voteRepo.getAllForRestaurant(restaurantId));
-    }
-
-    @Override
-    public List<VoteTo> getAll() {
-        return VoteUtil.asTo(voteRepo.findAll());
+        return VoteUtil.asTo(voteRepo.getAllForRestaurantInDate(date, restaurantId));
     }
 
     @Override
     public List<VoteTo> getAllInDate(LocalDate date) {
-        LocalDateTime dateTime = date.atStartOfDay();
-        return VoteUtil.asTo(voteRepo.getAllByDate(dateTime.with(LocalTime.MIN), dateTime.with(LocalTime.MAX)));
+        return VoteUtil.asTo(voteRepo.getAllInDate(date));
     }
 
-    private Vote updateExisted(Vote vote, int restaurantId, LocalDateTime dateTime) {
-        ValidationUtil.checkTimeExpiration(dateTime.toLocalTime(), VOTE_TIME_EXPIRATION);
+    private Vote updateExisted(Vote vote, int restaurantId) {
+        ValidationUtil.checkTimeExpiration(LocalTime.now(), VOTE_TIME_EXPIRATION);
         vote.setRestaurant(restRepo.getById(restaurantId));
-        vote.setVoteDateTime(dateTime);
         return vote;
     }
 

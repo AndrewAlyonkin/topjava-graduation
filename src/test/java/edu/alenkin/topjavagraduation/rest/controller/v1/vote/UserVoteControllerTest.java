@@ -12,8 +12,6 @@ import org.springframework.security.test.context.support.WithUserDetails;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import java.time.LocalTime;
-import java.util.Comparator;
-import java.util.List;
 
 import static edu.alenkin.topjavagraduation.JsonMatchers.jsonMatcher;
 import static edu.alenkin.topjavagraduation.RestaurantTestData.BISON_ID;
@@ -40,10 +38,10 @@ class UserVoteControllerTest extends AbstractControllerTest {
         LocalTime expiration = service.getVoteTimeExpiration();
         service.setVoteTimeExpiration(LocalTime.MAX);
 
-        perform(MockMvcRequestBuilders.post(URL).param("restId",String.valueOf(BISON_ID))
+        perform(MockMvcRequestBuilders.post(URL).param("restId", String.valueOf(BISON_ID))
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isCreated())
-                .andExpect(jsonMatcher(getNewVoteTo(), VoteTo.class, VoteTestData::assertEqualsNoIdAndDateTime));
+                .andExpect(jsonMatcher(getNewVoteTo(), VoteTo.class, VoteTestData::assertEqualsNoId));
 
         service.setVoteTimeExpiration(expiration);
     }
@@ -54,7 +52,7 @@ class UserVoteControllerTest extends AbstractControllerTest {
         LocalTime expiration = service.getVoteTimeExpiration();
         service.setVoteTimeExpiration(LocalTime.MIN);
 
-        perform(MockMvcRequestBuilders.post(URL).param("restId",String.valueOf(BISON_ID))
+        perform(MockMvcRequestBuilders.post(URL).param("restId", String.valueOf(BISON_ID))
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isUnprocessableEntity());
 
@@ -67,10 +65,10 @@ class UserVoteControllerTest extends AbstractControllerTest {
         LocalTime expiration = service.getVoteTimeExpiration();
         service.setVoteTimeExpiration(LocalTime.MAX);
 
-        perform(MockMvcRequestBuilders.put(URL).param("restId",String.valueOf(BISON_ID))
+        perform(MockMvcRequestBuilders.put(URL).param("restId", String.valueOf(BISON_ID))
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNoContent())
-                .andExpect(jsonMatcher(getUpdated(), VoteTo.class, VoteTestData::assertEqualsNoIdAndDateTime));
+                .andExpect(jsonMatcher(getUpdated(), VoteTo.class, VoteTestData::assertEqualsNoId));
 
         service.setVoteTimeExpiration(expiration);
     }
@@ -81,7 +79,7 @@ class UserVoteControllerTest extends AbstractControllerTest {
         LocalTime expiration = service.getVoteTimeExpiration();
         service.setVoteTimeExpiration(LocalTime.MIN);
 
-        perform(MockMvcRequestBuilders.put(URL).param("restId",String.valueOf(BISON_ID))
+        perform(MockMvcRequestBuilders.put(URL).param("restId", String.valueOf(BISON_ID))
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isUnprocessableEntity());
 
@@ -90,16 +88,12 @@ class UserVoteControllerTest extends AbstractControllerTest {
 
     @Test
     @WithUserDetails(value = USER_MAIL)
-    void getOwnVotes() throws Exception {
+    void getOwnVote() throws Exception {
         perform(MockMvcRequestBuilders.get(URL))
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andExpect(JsonMatchers.jsonMatcher(List.of(USER_VOTE_TO_NOW, USER_VOTE_TO2, USER_VOTE_TO1),
-                        VoteTo.class,
-                        (actual, expected) -> {
-                            actual.sort(Comparator.comparing(VoteTo::getDateTime).reversed());
-                            assertEqualsNoDateTime(actual, expected);
-                        }));
+                .andExpect(JsonMatchers.jsonMatcher(USER_VOTE_TO_NOW,
+                        VoteTo.class, VoteTestData::assertEqualsNoId));
     }
 }
