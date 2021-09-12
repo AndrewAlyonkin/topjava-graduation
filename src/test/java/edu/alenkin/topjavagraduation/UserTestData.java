@@ -14,7 +14,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * oxqq@ya.ru
  */
 public class UserTestData {
-    public static final MatcherFactory.Matcher<User> MATCHER = MatcherFactory.usingIgnoringFieldsComparator(User.class, "registered", "password");
+    public static final MatcherUtils.Matcher<User> MATCHER = MatcherUtils.usingIgnoringFieldsComparator(User.class, "registered", "password");
     public static final int USER_ID = START_SEQ;
     public static final int ADMIN_ID = START_SEQ + 1;
     public static final int NOT_FOUND = 10;

@@ -11,7 +11,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
-import static edu.alenkin.topjavagraduation.MatcherFactory.assertMatch;
+import static edu.alenkin.topjavagraduation.MatcherUtils.assertMatch;
 import static edu.alenkin.topjavagraduation.RestaurantTestData.GOLDEN;
 import static edu.alenkin.topjavagraduation.RestaurantTestData.GOLDEN_ID;
 import static edu.alenkin.topjavagraduation.UserTestData.USER_ID;

@@ -13,21 +13,13 @@ import java.util.function.BiConsumer;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
- * Factory for creating test matchers.
- * <p>
  * Comparing actual and expected objects via AssertJ
  * Support converting json MvcResult to objects for comparing.
  */
-public class MatcherFactory {
+public class MatcherUtils {
 
     public static <T> Matcher<T> usingAssertions(Class<T> clazz, BiConsumer<T, T> assertion, BiConsumer<Iterable<T>, Iterable<T>> iterableAssertion) {
         return new Matcher<>(clazz, assertion, iterableAssertion);
-    }
-
-    public static <T> Matcher<T> usingEqualsComparator(Class<T> clazz) {
-        return usingAssertions(clazz,
-                (a, e) -> assertThat(a).isEqualTo(e),
-                (a, e) -> assertThat(a).isEqualTo(e));
     }
 
     public static <T> Matcher<T> usingIgnoringFieldsComparator(Class<T> clazz, String... fieldsToIgnore) {
@@ -67,27 +59,6 @@ public class MatcherFactory {
 
         public void assertMatch(Iterable<T> actual, Iterable<T> expected) {
             iterableAssertion.accept(actual, expected);
-        }
-
-        public ResultMatcher contentJson(T expected) {
-            return result -> assertMatch(JsonUtil.readValue(getContent(result), clazz), expected);
-        }
-
-        @SafeVarargs
-        public final ResultMatcher contentJson(T... expected) {
-            return contentJson(List.of(expected));
-        }
-
-        public ResultMatcher contentJson(Iterable<T> expected) {
-            return result -> assertMatch(JsonUtil.readValues(getContent(result), clazz), expected);
-        }
-
-        public T readFromJson(ResultActions action) throws UnsupportedEncodingException, JsonProcessingException {
-            return JsonUtil.readValue(getContent(action.andReturn()), clazz);
-        }
-
-        private static String getContent(MvcResult result) throws UnsupportedEncodingException {
-            return result.getResponse().getContentAsString();
         }
     }
 }
