@@ -1,6 +1,7 @@
 package edu.alenkin.topjavagraduation.rest.controller.v1.vote;
 
 import edu.alenkin.topjavagraduation.JsonMatchers;
+import edu.alenkin.topjavagraduation.VoteTestData;
 import edu.alenkin.topjavagraduation.dto.VoteTo;
 import edu.alenkin.topjavagraduation.rest.controller.v1.AbstractControllerTest;
 import org.junit.jupiter.api.Assertions;
@@ -37,7 +38,8 @@ class AdminVoteControllerTest extends AbstractControllerTest {
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andExpect(JsonMatchers.jsonMatcher(List.of(ADMIN_VOTE_TO1), VoteTo.class, Assertions::assertEquals));
+                .andExpect(JsonMatchers.jsonMatcher(List.of(ADMIN_VOTE_TO1),
+                        VoteTo.class, VoteTestData::assertMatchNoUserAndRestaurantMenu));
     }
 
     @Test
@@ -61,6 +63,7 @@ class AdminVoteControllerTest extends AbstractControllerTest {
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andExpect(JsonMatchers.jsonMatcher(List.of(USER_VOTE_TO1, ADMIN_VOTE_TO1), VoteTo.class, Assertions::assertEquals));
+                .andExpect(JsonMatchers.jsonMatcher(List.of(USER_VOTE_TO1, ADMIN_VOTE_TO1),
+                        VoteTo.class, VoteTestData::assertMatchNoUserAndRestaurantMenu));
     }
 }

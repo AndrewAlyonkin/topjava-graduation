@@ -1,6 +1,7 @@
 package edu.alenkin.topjavagraduation;
 
 import edu.alenkin.topjavagraduation.dto.VoteTo;
+import edu.alenkin.topjavagraduation.model.Vote;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -34,8 +35,12 @@ public class VoteTestData {
 
     public static final List<VoteTo> allVotes = List.of(USER_VOTE_TO_NOW, USER_VOTE_TO2, ADMIN_VOTE_TO2, USER_VOTE_TO1, ADMIN_VOTE_TO1);
 
-    public static void assertEqualsNoId(VoteTo actual, VoteTo expected) {
+    public static void assertMatchNoId(VoteTo actual, VoteTo expected) {
         assertThat(actual).usingRecursiveComparison().ignoringFields("id").isEqualTo(expected);
+    }
+
+    public static <T> void assertMatchNoUserAndRestaurantMenu(T actual, T expected) {
+        assertThat(actual).usingRecursiveComparison().ignoringFields("user", "restaurant.menu").isEqualTo(expected);
     }
 
     public static VoteTo getNewVoteTo() {

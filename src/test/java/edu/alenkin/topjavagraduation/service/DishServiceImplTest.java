@@ -16,7 +16,6 @@ import static edu.alenkin.topjavagraduation.DishTestData.*;
 import static edu.alenkin.topjavagraduation.RestaurantTestData.*;
 import static edu.alenkin.topjavagraduation.model.AbstractBaseEntity.START_SEQ;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
@@ -34,7 +33,7 @@ class DishServiceImplTest extends AbstractServiceTest {
         int newId = created.id();
         Dish newDish = getNew();
         newDish.setId(newId);
-        assertEquals(newDish, created);
+        assertNoRestaurantEquals(newDish, created);
     }
 
     @Test
@@ -46,7 +45,7 @@ class DishServiceImplTest extends AbstractServiceTest {
 
     @Test
     void get() {
-        assertEquals(currDateSoupBison, service.get(START_SEQ + 5, BISON_ID));
+        assertNoRestaurantEquals(currDateSoupBison, service.get(START_SEQ + 5, BISON_ID));
     }
 
     @Test
@@ -58,7 +57,7 @@ class DishServiceImplTest extends AbstractServiceTest {
     void update() {
         Dish updated = getUpdated();
         service.update(updated, BISON_ID);
-        assertEquals(getUpdated(), service.get(START_SEQ + 5, BISON_ID));
+        assertNoRestaurantEquals(getUpdated(), service.get(START_SEQ + 5, BISON_ID));
     }
 
     @Test

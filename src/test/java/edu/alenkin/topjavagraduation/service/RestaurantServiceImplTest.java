@@ -1,5 +1,7 @@
 package edu.alenkin.topjavagraduation.service;
 
+import edu.alenkin.topjavagraduation.MatcherFactory;
+import edu.alenkin.topjavagraduation.RestaurantTestData;
 import edu.alenkin.topjavagraduation.exception.NotFoundException;
 import edu.alenkin.topjavagraduation.model.Restaurant;
 import org.junit.jupiter.api.BeforeAll;
@@ -11,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 
+import static edu.alenkin.topjavagraduation.MatcherFactory.assertMatch;
 import static edu.alenkin.topjavagraduation.RestaurantTestData.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -36,7 +39,7 @@ class RestaurantServiceImplTest extends AbstractServiceTest {
         int newId = created.id();
         Restaurant newRestaurant = getNew();
         newRestaurant.setId(newId);
-        assertEquals(newRestaurant, created);
+        assertMatch(newRestaurant, created);
     }
 
     @Test
@@ -48,7 +51,7 @@ class RestaurantServiceImplTest extends AbstractServiceTest {
 
     @Test
     void get() {
-        assertEquals(BISON, service.get(BISON_ID));
+        assertMatch(BISON, service.get(BISON_ID));
     }
 
     @Test
@@ -58,14 +61,14 @@ class RestaurantServiceImplTest extends AbstractServiceTest {
 
     @Test
     void getAllWithMenu() {
-        assertEquals(service.getAllWithMenu(LocalDate.now()), allRestaurantsWithMenuInCurrDay);
+        assertMatch(service.getAllWithMenu(LocalDate.now()), allRestaurantsWithMenuInCurrDay, RestaurantTestData::assertNoMenuRestaurantMatch);
     }
 
     @Test
     void update() {
         Restaurant updated = getUpdated();
         service.update(updated);
-        assertEquals(getUpdated(), service.get(GOLDEN_ID));
+        assertNoMenuRestaurantMatch(getUpdated(), service.get(GOLDEN_ID));
     }
 
     @Test

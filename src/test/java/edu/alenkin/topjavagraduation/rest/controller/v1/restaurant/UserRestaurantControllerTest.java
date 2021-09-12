@@ -4,7 +4,6 @@ import edu.alenkin.topjavagraduation.JsonMatchers;
 import edu.alenkin.topjavagraduation.RestaurantTestData;
 import edu.alenkin.topjavagraduation.model.Restaurant;
 import edu.alenkin.topjavagraduation.rest.controller.v1.AbstractControllerTest;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithUserDetails;
@@ -37,7 +36,7 @@ class UserRestaurantControllerTest extends AbstractControllerTest {
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andExpect(JsonMatchers.jsonMatcher(GOLDEN, Restaurant.class, RestaurantTestData::assertNoMenuEquals));
+                .andExpect(JsonMatchers.jsonMatcher(GOLDEN, Restaurant.class, RestaurantTestData::assertNoMenuMatch));
     }
 
     @Test
@@ -60,22 +59,26 @@ class UserRestaurantControllerTest extends AbstractControllerTest {
     @Test
     @WithUserDetails(value = USER_MAIL)
     void getAllWithMenuForToday() throws Exception {
+        initRestaurantsMenu();
         perform(MockMvcRequestBuilders.get(URL + "today"))
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andExpect(JsonMatchers.jsonMatcher(allRestaurantsWithMenuInCurrDay, Restaurant.class, Assertions::assertIterableEquals));
+                .andExpect(JsonMatchers.jsonMatcher(allRestaurantsWithMenuInCurrDay, Restaurant.class,
+                        RestaurantTestData::assertNoMenuRestaurantMatch));
     }
 
     @Test
     @WithUserDetails(value = USER_MAIL)
     void getAllWithMenuForDate() throws Exception {
+        initRestaurantsMenu();
         perform(MockMvcRequestBuilders.get(URL + "date")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(writeValue(LocalDate.now())))
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andExpect(JsonMatchers.jsonMatcher(allRestaurantsWithMenuInCurrDay, Restaurant.class, Assertions::assertIterableEquals));
+                .andExpect(JsonMatchers.jsonMatcher(allRestaurantsWithMenuInCurrDay, Restaurant.class,
+                        RestaurantTestData::assertNoMenuRestaurantMatch));
     }
 }

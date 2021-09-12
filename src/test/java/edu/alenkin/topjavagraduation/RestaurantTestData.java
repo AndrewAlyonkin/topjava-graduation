@@ -93,11 +93,11 @@ public class RestaurantTestData {
         return new Restaurant(null, "New Restaurant");
     }
 
-    public static void assertEquals(Restaurant actual, Restaurant expected) {
+    public static <T> void assertNoMenuRestaurantMatch(T actual, T expected) {
         assertThat(actual).usingRecursiveComparison().ignoringFields("menu.restaurant").isEqualTo(expected);
     }
 
-    public static void assertNoMenuEquals(Restaurant actual, Restaurant expected) {
+    public static <T> void assertNoMenuMatch(T actual, T expected) {
         assertThat(actual).usingRecursiveComparison().ignoringFields("menu").isEqualTo(expected);
     }
 }

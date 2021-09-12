@@ -36,6 +36,15 @@ public class MatcherFactory {
                 (a, e) -> assertThat(a).usingElementComparatorIgnoringFields(fieldsToIgnore).isEqualTo(e));
     }
 
+    public static <T> void assertMatch(T actual, T expected) {
+        assertThat(actual).usingRecursiveComparison().isEqualTo(expected);
+    }
+
+    public static <T> void assertMatch(Iterable<T> actual, Iterable<T> expected, BiConsumer<Iterable<T>,
+            Iterable<T>> iterableAssertion) {
+        iterableAssertion.accept(actual, expected);
+    }
+
     public static class Matcher<T> {
         private final Class<T> clazz;
         private final BiConsumer<T, T> assertion;

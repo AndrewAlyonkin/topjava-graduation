@@ -41,7 +41,7 @@ class UserVoteControllerTest extends AbstractControllerTest {
         perform(MockMvcRequestBuilders.post(URL).param("restId", String.valueOf(BISON_ID))
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isCreated())
-                .andExpect(jsonMatcher(getNewVoteTo(), VoteTo.class, VoteTestData::assertEqualsNoId));
+                .andExpect(jsonMatcher(getNewVoteTo(), VoteTo.class, VoteTestData::assertMatchNoId));
 
         service.setVoteTimeExpiration(expiration);
     }
@@ -68,7 +68,7 @@ class UserVoteControllerTest extends AbstractControllerTest {
         perform(MockMvcRequestBuilders.put(URL).param("restId", String.valueOf(BISON_ID))
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNoContent())
-                .andExpect(jsonMatcher(getUpdated(), VoteTo.class, VoteTestData::assertEqualsNoId));
+                .andExpect(jsonMatcher(getUpdated(), VoteTo.class, VoteTestData::assertMatchNoId));
 
         service.setVoteTimeExpiration(expiration);
     }
@@ -94,6 +94,6 @@ class UserVoteControllerTest extends AbstractControllerTest {
                 .andDo(print())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
                 .andExpect(JsonMatchers.jsonMatcher(USER_VOTE_TO_NOW,
-                        VoteTo.class, VoteTestData::assertEqualsNoId));
+                        VoteTo.class, VoteTestData::assertMatchNoId));
     }
 }

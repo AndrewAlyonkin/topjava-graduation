@@ -62,7 +62,7 @@ class AdminRestaurantControllerTest extends AbstractControllerTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(writeValue(updated)))
                 .andExpect(status().isNoContent());
-        RestaurantTestData.assertEquals(updated, repository.findById(GOLDEN_ID).orElseThrow());
+        RestaurantTestData.assertNoMenuRestaurantMatch(updated, repository.findById(GOLDEN_ID).orElseThrow());
     }
 
     @Test
