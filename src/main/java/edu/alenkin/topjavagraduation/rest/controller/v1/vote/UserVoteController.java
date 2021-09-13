@@ -8,6 +8,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +20,7 @@ import springfox.documentation.annotations.ApiIgnore;
 import java.net.URI;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 import static edu.alenkin.topjavagraduation.rest.controller.v1.vote.UserVoteController.REST_URL;
 
@@ -67,11 +69,10 @@ public class UserVoteController {
     @GetMapping
     @ResponseStatus(value = HttpStatus.OK)
     public VoteTo getOwnVoteInDate(@AuthenticationPrincipal @ApiIgnore AuthorizedUser authorizedUser,
-                                    @RequestParam(required = false) LocalDate date) {
+                                   @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Optional<LocalDate> date) {
         int authUserId = authorizedUser.getId();
-        log.info("Get all votes for user {} in {}", authUserId, date);
-        return (date == null)
-                ? service.getByUserAndDate(authUserId, LocalDate.now())
-                : service.getByUserAndDate(authUserId, date);
+        LocalDate requiredDate = date.orElse(LocalDate.now());
+        log.info("Get all votes for user {} in {}", authUserId, requiredDate);
+        return service.getByUserAndDate(authUserId, requiredDate);
     }
 }

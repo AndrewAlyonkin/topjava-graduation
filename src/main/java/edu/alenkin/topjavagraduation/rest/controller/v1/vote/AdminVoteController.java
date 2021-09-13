@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 import static edu.alenkin.topjavagraduation.rest.controller.v1.vote.AdminVoteController.REST_URL;
 
@@ -33,9 +34,9 @@ public class AdminVoteController {
 
     @ApiOperation(value = "Get all votes for restaurant in current day", response = Iterable.class)
     @GetMapping("/restaurant")
-    public List<VoteTo> getByRestaurantInDate(@RequestParam @Nullable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date,
+    public List<VoteTo> getByRestaurantInDate(@RequestParam @Nullable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Optional<LocalDate> date,
                                               @RequestParam int restId) {
-        LocalDate currentDate = (date == null) ? LocalDate.now() : date;
+        LocalDate currentDate = date.orElse(LocalDate.now());
 
         log.info("Get votes for restaurant {} in {}", restId, currentDate);
         return service.getByDateAndRestaurantId(currentDate, restId);

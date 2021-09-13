@@ -33,8 +33,6 @@ public class VoteTestData {
 
     public static final VoteTo USER_VOTE_TO_NOW = new VoteTo(USER_VOTE_NOW_ID, LocalDate.now(), BISON_ID, BISON.getName(), user.getName());
 
-    public static final List<VoteTo> allVotes = List.of(USER_VOTE_TO_NOW, USER_VOTE_TO2, ADMIN_VOTE_TO2, USER_VOTE_TO1, ADMIN_VOTE_TO1);
-
     public static void assertMatchNoId(VoteTo actual, VoteTo expected) {
         assertThat(actual).usingRecursiveComparison().ignoringFields("id").isEqualTo(expected);
     }

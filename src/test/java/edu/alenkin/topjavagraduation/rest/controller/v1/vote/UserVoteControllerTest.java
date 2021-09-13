@@ -88,12 +88,23 @@ class UserVoteControllerTest extends AbstractControllerTest {
 
     @Test
     @WithUserDetails(value = USER_MAIL)
-    void getOwnVote() throws Exception {
+    void getOwnVoteNullable() throws Exception {
         perform(MockMvcRequestBuilders.get(URL))
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
                 .andExpect(JsonMatchers.jsonMatcher(USER_VOTE_TO_NOW,
+                        VoteTo.class, VoteTestData::assertMatchNoId));
+    }
+
+    @Test
+    @WithUserDetails(value = USER_MAIL)
+    void getOwnVote() throws Exception {
+        perform(MockMvcRequestBuilders.get(URL).param("date", String.valueOf(august18)))
+                .andExpect(status().isOk())
+                .andDo(print())
+                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+                .andExpect(JsonMatchers.jsonMatcher(USER_VOTE_TO1,
                         VoteTo.class, VoteTestData::assertMatchNoId));
     }
 }
