@@ -54,7 +54,7 @@ public class UserServiceImpl implements UserService {
     @Cacheable("user_cache")
     public User getByEmail(String email) {
         Assert.notNull(email, "email must not be null");
-        return checkNotFound(repository.getByEmail(email), "email=" + email);
+        return checkNotFound(repository.getByEmail(email).orElse(null), "email=" + email);
     }
 
     public List<User> getAll() {
@@ -89,10 +89,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDetails loadUserByUsername(String email) {
-        User user = repository.getByEmail(email.toLowerCase());
-        if (user == null) {
-            throw new UsernameNotFoundException("User " + email + " is not found");
-        }
+        User user = repository.getByEmail(email.toLowerCase())
+                .orElseThrow(() -> new UsernameNotFoundException("User " + email + " is not found"));
         return new AuthorizedUser(user);
     }
 }

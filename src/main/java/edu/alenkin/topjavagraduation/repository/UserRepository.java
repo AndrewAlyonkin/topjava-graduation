@@ -8,6 +8,8 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 /**
  * @author Alenkin Andrew
  * oxqq@ya.ru
@@ -17,7 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 public interface UserRepository extends JpaRepository<User, Integer> {
 
     @Query("SELECT u FROM User u WHERE u.email=:email")
-    User getByEmail(@Param("email") String email);
+    Optional<User> getByEmail(@Param("email") String email);
 
     User getById(int id);
 
