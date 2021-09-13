@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author Alenkin Andrew
@@ -23,7 +24,7 @@ public interface VoteRepository extends JpaRepository<Vote, Integer> {
             SELECT v FROM Vote v
             WHERE v.user.id =:userId AND v.voteDate=:voteDate
             """)
-    Vote getForUserInDate(@Param("userId") int userId, @Param("voteDate")LocalDate voteDate);
+    Optional<Vote> getForUserInDate(@Param("userId") int userId, @Param("voteDate")LocalDate voteDate);
 
     @Query("""
             SELECT v FROM Vote v

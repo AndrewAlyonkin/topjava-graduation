@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author Alenkin Andrew
@@ -35,16 +36,15 @@ public class VoteServiceImpl implements VoteService {
     @Transactional
     public Vote create(int userId, int restaurantId) {
         LocalDate now = LocalDate.now();
-        Vote vote = voteRepo.getForUserInDate(userId, now);
-        Vote newVote = (vote == null)
-                ? new Vote(userRepo.getById(userId), restRepo.getById(restaurantId), now)
-                : updateExisted(vote, restaurantId);
+        Optional<Vote> vote = voteRepo.getForUserInDate(userId, now);
+        Vote newVote = vote.map(value -> updateExisted(value, restaurantId))
+                .orElseGet(() -> new Vote(userRepo.getById(userId), restRepo.getById(restaurantId), now));
         return voteRepo.save(newVote);
     }
 
     @Override
     public VoteTo getByUserAndDate(int userId, LocalDate date) {
-        return VoteUtil.asTo(voteRepo.getForUserInDate(userId, date));
+        return VoteUtil.asTo(voteRepo.getForUserInDate(userId, date).orElse(null));
     }
 
     @Override
