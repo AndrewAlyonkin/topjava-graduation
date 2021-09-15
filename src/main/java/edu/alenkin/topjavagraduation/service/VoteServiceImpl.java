@@ -26,7 +26,7 @@ import java.util.Optional;
 public class VoteServiceImpl implements VoteService {
 
     @Value("#{T(java.time.LocalTime).parse('${time.expiration}')}")
-    private LocalTime VOTE_TIME_EXPIRATION;
+    private LocalTime voteTimeExpiration;
 
     private final VoteRepository voteRepo;
     private final RestaurantRepository restRepo;
@@ -58,16 +58,16 @@ public class VoteServiceImpl implements VoteService {
     }
 
     private Vote updateExisted(Vote vote, int restaurantId) {
-        ValidationUtil.checkTimeExpiration(LocalTime.now(), VOTE_TIME_EXPIRATION);
+        ValidationUtil.checkTimeExpiration(LocalTime.now(), voteTimeExpiration);
         vote.setRestaurant(restRepo.getById(restaurantId));
         return vote;
     }
 
     public void setVoteTimeExpiration(LocalTime VOTE_TIME_EXPIRATION) {
-        this.VOTE_TIME_EXPIRATION = VOTE_TIME_EXPIRATION;
+        this.voteTimeExpiration = VOTE_TIME_EXPIRATION;
     }
 
     public LocalTime getVoteTimeExpiration() {
-        return VOTE_TIME_EXPIRATION;
+        return voteTimeExpiration;
     }
 }
