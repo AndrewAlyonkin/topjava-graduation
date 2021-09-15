@@ -63,8 +63,8 @@ public class VoteServiceImpl implements VoteService {
         return vote;
     }
 
-    public void setVoteTimeExpiration(LocalTime VOTE_TIME_EXPIRATION) {
-        this.voteTimeExpiration = VOTE_TIME_EXPIRATION;
+    public void setVoteTimeExpiration(LocalTime voteTimeExpiration) {
+        this.voteTimeExpiration = voteTimeExpiration;
     }
 
     public LocalTime getVoteTimeExpiration() {
