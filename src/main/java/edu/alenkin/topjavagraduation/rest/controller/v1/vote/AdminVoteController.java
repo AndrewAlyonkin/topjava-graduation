@@ -2,14 +2,17 @@ package edu.alenkin.topjavagraduation.rest.controller.v1.vote;
 
 import edu.alenkin.topjavagraduation.dto.VoteTo;
 import edu.alenkin.topjavagraduation.service.VoteService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.MediaType;
 import org.springframework.lang.Nullable;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -21,7 +24,7 @@ import static edu.alenkin.topjavagraduation.rest.controller.v1.vote.AdminVoteCon
  * @author Alenkin Andrew
  * oxqq@ya.ru
  */
-@Api(value = "Admin vote controller", tags = {"Getting statistics of votes for the administrator"})
+@Tag(name = "Admin vote controller", description = "Getting statistics of votes for the administrator")
 @RestController
 @RequestMapping(value = REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 @RequiredArgsConstructor
@@ -32,7 +35,7 @@ public class AdminVoteController {
 
     private final VoteService service;
 
-    @ApiOperation(value = "Get all votes for restaurant in current day", response = Iterable.class)
+    @Operation(summary = "Get all votes for restaurant in current day")
     @GetMapping("/restaurant")
     public List<VoteTo> getByRestaurantInDate(@RequestParam @Nullable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Optional<LocalDate> date,
                                               @RequestParam int restId) {
@@ -42,7 +45,7 @@ public class AdminVoteController {
         return service.getByDateAndRestaurantId(currentDate, restId);
     }
 
-    @ApiOperation(value = "Get all votes for all restaurants in current date", response = Iterable.class)
+    @Operation(summary = "Get all votes for all restaurants in current date")
     @GetMapping("/date")
     public List<VoteTo> getAllInDate(@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
         log.info("Get all votes in {}", date);

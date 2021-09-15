@@ -4,8 +4,9 @@ import edu.alenkin.topjavagraduation.dto.VoteTo;
 import edu.alenkin.topjavagraduation.security.AuthorizedUser;
 import edu.alenkin.topjavagraduation.service.VoteService;
 import edu.alenkin.topjavagraduation.util.VoteUtil;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -15,11 +16,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-import springfox.documentation.annotations.ApiIgnore;
 
 import java.net.URI;
 import java.time.LocalDate;
-import java.util.List;
 import java.util.Optional;
 
 import static edu.alenkin.topjavagraduation.rest.controller.v1.vote.UserVoteController.REST_URL;
@@ -28,7 +27,7 @@ import static edu.alenkin.topjavagraduation.rest.controller.v1.vote.UserVoteCont
  * @author Alenkin Andrew
  * oxqq@ya.ru
  */
-@Api(value = "User vote controller", tags = {"For user voting"})
+@Tag(name = "User vote controller", description = "For user voting")
 @RestController
 @RequestMapping(value = REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 @RequiredArgsConstructor
@@ -39,10 +38,10 @@ public class UserVoteController {
 
     private final VoteService service;
 
-    @ApiOperation(value = "Take a vote for some restaurant with required ID", response = VoteTo.class)
+    @Operation(summary = "Take a vote for some restaurant with required ID")
     @PostMapping
     public ResponseEntity<VoteTo> create(@RequestParam int restId,
-                                         @AuthenticationPrincipal @ApiIgnore AuthorizedUser authorizedUser) {
+                                         @AuthenticationPrincipal @Parameter(hidden = true) AuthorizedUser authorizedUser) {
         int authUserId = authorizedUser.getId();
         log.info("User {} votes for {}", authUserId, restId);
 
@@ -55,20 +54,20 @@ public class UserVoteController {
         return ResponseEntity.created(uriOfNewResource).body(created);
     }
 
-    @ApiOperation(value = "Change your vote. You cant change vote after vote expiration time", response = VoteTo.class)
+    @Operation(summary = "Change your vote. You cant change vote after vote expiration time")
     @PutMapping
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public VoteTo update(@RequestParam int restId,
-                         @AuthenticationPrincipal @ApiIgnore AuthorizedUser authorizedUser) {
+                         @AuthenticationPrincipal @Parameter(hidden = true) AuthorizedUser authorizedUser) {
         int authUserId = authorizedUser.getId();
         log.info("User {} updates vote and votes for {}", authUserId, restId);
         return VoteUtil.asTo(service.create(authUserId, restId));
     }
 
-    @ApiOperation(value = "Get own vote in current date(or now, if parameter date is empty)", response = Iterable.class)
+    @Operation(summary = "Get own vote in current date(or now, if parameter date is empty)")
     @GetMapping
     @ResponseStatus(value = HttpStatus.OK)
-    public VoteTo getOwnVoteInDate(@AuthenticationPrincipal @ApiIgnore AuthorizedUser authorizedUser,
+    public VoteTo getOwnVoteInDate(@AuthenticationPrincipal @Parameter(hidden = true) AuthorizedUser authorizedUser,
                                    @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Optional<LocalDate> date) {
         int authUserId = authorizedUser.getId();
         LocalDate requiredDate = date.orElse(LocalDate.now());

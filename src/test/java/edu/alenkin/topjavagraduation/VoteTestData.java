@@ -1,10 +1,8 @@
 package edu.alenkin.topjavagraduation;
 
 import edu.alenkin.topjavagraduation.dto.VoteTo;
-import edu.alenkin.topjavagraduation.model.Vote;
 
 import java.time.LocalDate;
-import java.util.List;
 
 import static edu.alenkin.topjavagraduation.RestaurantTestData.*;
 import static edu.alenkin.topjavagraduation.UserTestData.admin;

@@ -15,7 +15,6 @@ import java.time.LocalDate;
 import static edu.alenkin.topjavagraduation.MatcherUtils.assertMatch;
 import static edu.alenkin.topjavagraduation.RestaurantTestData.*;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**

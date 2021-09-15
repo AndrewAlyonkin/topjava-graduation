@@ -1,4 +1,4 @@
-package edu.alenkin.topjavagraduation.security;
+package edu.alenkin.topjavagraduation.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.alenkin.topjavagraduation.util.JsonUtil;

@@ -4,7 +4,6 @@ import edu.alenkin.topjavagraduation.JsonMatchers;
 import edu.alenkin.topjavagraduation.VoteTestData;
 import edu.alenkin.topjavagraduation.dto.VoteTo;
 import edu.alenkin.topjavagraduation.rest.controller.v1.AbstractControllerTest;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithUserDetails;

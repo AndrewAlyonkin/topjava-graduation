@@ -1,8 +1,8 @@
 package edu.alenkin.topjavagraduation.rest.controller.v1.userprofile;
 
 import edu.alenkin.topjavagraduation.model.User;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -19,14 +19,14 @@ import static edu.alenkin.topjavagraduation.rest.controller.v1.userprofile.Admin
  * @author Alenkin Andrew
  * oxqq@ya.ru
  */
-@Api(value = "Admin user controller", tags = {"Admin operations with users"})
+@Tag(name = "Admin user controller", description = "Admin operations with users")
 @RestController
 @RequestMapping(value = REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 public class AdminUserController extends AbstractUserController {
 
     static final String REST_URL = "/rest/v1/admin/users";
 
-    @ApiOperation(value = "Create new user and save it to storage", response = User.class)
+    @Operation(summary = "Create new user and save it to storage")
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<User> createWithLocation(@RequestBody @Valid User user) {
         var created = super.create(user);
@@ -36,28 +36,28 @@ public class AdminUserController extends AbstractUserController {
         return ResponseEntity.created(uriOfNewResource).body(created);
     }
 
-    @ApiOperation(value = "Get user with required ID", response = User.class)
+    @Operation(summary = "Get user with required ID")
     @Override
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public User get(@PathVariable("id") int id) {
         return super.get(id);
     }
 
-    @ApiOperation(value = "Get all users from storage", response = Iterable.class)
+    @Operation(summary = "Get all users from storage")
     @Override
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<User> getAll() {
         return super.getAll();
     }
 
-    @ApiOperation(value = "Get user with required email", response = User.class)
+    @Operation(summary = "Get user with required email")
     @Override
     @GetMapping("/email")
     public User getByEmail(@RequestParam String email) {
         return super.getByEmail(email);
     }
 
-    @ApiOperation(value = "Update existing user", response = User.class)
+    @Operation(summary = "Update existing user")
     @Override
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
@@ -65,7 +65,7 @@ public class AdminUserController extends AbstractUserController {
         return super.update(user, id);
     }
 
-    @ApiOperation(value = "Delete user with required ID")
+    @Operation(summary = "Delete user with required ID")
     @Override
     @DeleteMapping(value = "/{id}")
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
@@ -73,7 +73,7 @@ public class AdminUserController extends AbstractUserController {
         super.delete(id);
     }
 
-    @ApiOperation(value = "Enable or disable user access to application")
+    @Operation(summary = "Enable or disable user access to application")
     @Override
     @PatchMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)

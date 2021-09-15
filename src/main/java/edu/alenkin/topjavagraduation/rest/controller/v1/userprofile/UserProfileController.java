@@ -3,8 +3,8 @@ package edu.alenkin.topjavagraduation.rest.controller.v1.userprofile;
 import edu.alenkin.topjavagraduation.dto.UserTo;
 import edu.alenkin.topjavagraduation.model.User;
 import edu.alenkin.topjavagraduation.security.AuthorizedUser;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -21,13 +21,13 @@ import static edu.alenkin.topjavagraduation.rest.controller.v1.userprofile.UserP
  * @author Alenkin Andrew
  * oxqq@ya.ru
  */
-@Api(value = "User profile controller", tags = {"User base operations with own profile"})
+@Tag(name = "User profile controller", description = "User base operations with own profile")
 @RestController
 @RequestMapping(value = REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 public class UserProfileController extends AbstractUserController {
     static final String REST_URL = "/rest/v1/profile";
 
-    @ApiOperation(value = "Create new account for yourself", response = User.class)
+    @Operation(summary = "Create new account for yourself")
     @PostMapping(value = "/register", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(value = HttpStatus.CREATED)
     public ResponseEntity<User> register(@RequestBody UserTo userTo) {
@@ -38,20 +38,20 @@ public class UserProfileController extends AbstractUserController {
         return ResponseEntity.created(uriOfNewResource).body(created);
     }
 
-    @ApiOperation(value = "Get your own account", response = User.class)
+    @Operation(summary = "Get your own account")
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public User get(@AuthenticationPrincipal AuthorizedUser authorizedUser) {
         return super.get(authorizedUser.getId());
     }
 
-    @ApiOperation(value = "Update own account")
+    @Operation(summary = "Update own account")
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void update(@Valid @RequestBody UserTo userTo, @AuthenticationPrincipal AuthorizedUser authUser) {
         super.update(userTo, authUser.getId());
     }
 
-    @ApiOperation(value = "Delete own account")
+    @Operation(summary = "Delete own account")
     @DeleteMapping
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public void delete(@AuthenticationPrincipal AuthorizedUser authorizedUser) {

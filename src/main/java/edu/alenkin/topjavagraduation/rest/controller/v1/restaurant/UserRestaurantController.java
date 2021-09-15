@@ -4,8 +4,8 @@ import com.fasterxml.jackson.annotation.JsonView;
 import edu.alenkin.topjavagraduation.model.Restaurant;
 import edu.alenkin.topjavagraduation.modelview.View;
 import edu.alenkin.topjavagraduation.service.RestaurantService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.MediaType;
 import org.springframework.lang.Nullable;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +19,7 @@ import static edu.alenkin.topjavagraduation.rest.controller.v1.restaurant.UserRe
  * @author Alenkin Andrew
  * oxqq@ya.ru
  */
-@Api(value = "User restaurant controller", tags = {"User operations with restaurants"})
+@Tag(name = "User restaurant controller", description = "User operations with restaurants")
 @RestController
 @RequestMapping(value = REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 public class UserRestaurantController extends AbstractRestaurantController {
@@ -30,26 +30,26 @@ public class UserRestaurantController extends AbstractRestaurantController {
         super(service);
     }
 
-    @ApiOperation(value = "Get restaurant with required ID", response = Restaurant.class)
+    @Operation(summary = "Get restaurant with required ID")
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public Restaurant get(@PathVariable int id) {
         return super.get(id);
     }
 
-    @ApiOperation(value = "Get all restaurants from storage", response = Iterable.class)
+    @Operation(summary = "Get all restaurants from storage")
     @JsonView(View.RestaurantWithoutMenu.class)
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Restaurant> getAll() {
         return super.getAll();
     }
 
-    @ApiOperation(value = "Get all restaurants with its menu for today", response = Iterable.class)
+    @Operation(summary = "Get all restaurants with its menu for today")
     @GetMapping(value = "/today", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Restaurant> getAllWithMenuForToday() {
         return super.getAllWithDishes(LocalDate.now());
     }
 
-    @ApiOperation(value = "Get all restaurants with its menu for current date", response = Iterable.class)
+    @Operation(summary = "Get all restaurants with its menu for current date")
     @GetMapping(value = "/date", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Restaurant> getAllWithMenuForDate(@RequestParam @Nullable LocalDate date) {
         return super.getAllWithDishes(date == null ? LocalDate.now() : date);
